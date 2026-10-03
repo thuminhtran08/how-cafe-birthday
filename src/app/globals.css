@@ -1,26 +1,5120 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+--how-orange: #ff6a42;
+
+--how-cream: #fefbec;
+
+--how-black: #000000;
+
+--how-brown: #572514;
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+
+body {
+
+width: 100%;
+
+min-height: 100%;
+
+margin: 0;
+
+padding: 0;
+
+background: var(--how-cream);
+
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+overflow-x: hidden;
+
+color: var(--how-black);
+
+font-family: var(--font-cda), sans-serif;
+
+font-weight: 500;
+
+}
+
+button,
+
+a,
+
+input,
+
+select { font: inherit; }
+
+button { border: 0; }
+
+/* =========================
+
+GLOBAL / PERSISTENT AUDIO
+
+\\\\========================= */
+
+.audio-toggle {
+
+position: fixed;
+
+z-index: 100;
+
+right: max(14px, env(safe-area-inset-right));
+
+bottom: max(14px, env(safe-area-inset-bottom));
+
+width: 40px;
+
+height: 40px;
+
+padding: 0;
+
+display: grid;
+
+place-items: center;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 50%;
+
+background: var(--how-cream);
+
+color: var(--how-brown);
+
+font-size: 17px;
+
+line-height: 1;
+
+cursor: pointer;
+
+-webkit-tap-highlight-color: transparent;
+
+}
+
+.audio-toggle:focus-visible {
+
+outline: 2px solid var(--how-orange);
+
+outline-offset: 3px;
+
+}
+
+.audio-toggle--error { opacity: .55; }
+
+/* =========================
+
+PAGE 1 / INTRO
+
+\\\\========================= */
+
+.birthday-page,
+
+.birthday-hero {
+
+width: 100%;
+
+height: 100dvh;
+
+min-height: 100dvh;
+
+overflow: hidden;
+
+background: var(--how-cream);
+
+}
+
+.birthday-hero { position: relative; }
+
+.birthday-header {
+
+position: absolute;
+
+z-index: 30;
+
+top: 0;
+
+left: 0;
+
+width: 100%;
+
+padding: max(16px, env(safe-area-inset-top)) clamp(16px, 4.5vw, 22px) 0;
+
+display: flex;
+
+align-items: flex-start;
+
+justify-content: space-between;
+
+}
+
+.how-logo {
+
+display: block;
+
+width: clamp(90px, 25.8vw, 122px);
+
+line-height: 0;
+
+}
+
+.how-logo img {
+
+display: block;
+
+width: 100%;
+
+height: auto;
+
+object-fit: contain;
+
+}
+
+.menu-button {
+
+width: 33px;
+
+height: 33px;
+
+padding: 4px 1px;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+gap: 4px;
+
+background: transparent;
+
+cursor: pointer;
+
+}
+
+.menu-button span {
+
+display: block;
+
+width: 100%;
+
+height: 2px;
+
+border-radius: 999px;
+
+background: var(--how-brown);
+
+}
+
+.confetti-canvas {
+
+position: fixed;
+
+z-index: 20;
+
+inset: 0;
+
+width: 100%;
+
+height: 100%;
+
+pointer-events: none;
+
+}
+
+.hero-content {
+
+position: relative;
+
+z-index: 5;
+
+width: min(calc(100% - 16px), 580px);
+
+height: 100dvh;
+
+margin-inline: auto;
+
+padding: max(62px, calc(env(safe-area-inset-top) + 54px)) 0 max(10px, env(safe-area-inset-bottom));
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: center;
+
+}
+
+.hero-artwork {
+
+width: 100%;
+
+min-height: 0;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+}
+
+.headline {
+
+position: relative;
+
+z-index: 8;
+
+width: 100%;
+
+margin-bottom: -5px;
+
+text-align: center;
+
+}
+
+.headline-row {
+
+display: flex;
+
+align-items: baseline;
+
+justify-content: center;
+
+gap: clamp(8px, 2.5vw, 15px);
+
+}
+
+.headline-happy,
+
+.headline h1,
+
+.sixth {
+
+margin: 0;
+
+font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+
+font-weight: 700;
+
+line-height: 1;
+
+}
+
+.headline-happy {
+
+color: var(--how-orange);
+
+font-size: clamp(29px, 9.2vw, 47px);
+
+}
+
+.headline h1 {
+
+color: var(--how-brown);
+
+font-size: clamp(29px, 8.5vw, 44px);
+
+}
+
+.sixth {
+
+color: var(--how-orange);
+
+font-size: clamp(30px, 9vw, 47px);
+
+transform: rotate(5deg);
+
+}
+
+.headline-brand {
+
+margin: 3px 0 0;
+
+color: var(--how-brown);
+
+font-size: clamp(14px, 3.7vw, 17px);
+
+font-weight: 500;
+
+}
+
+.cake-stage {
+
+width: min(96vw, 500px);
+
+max-width: 100%;
+
+min-height: 0;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+}
+
+.birthday-cake {
+
+display: block;
+
+width: 100%;
+
+height: auto;
+
+max-height: min(56dvh, 555px);
+
+object-fit: contain;
+
+}
+
+.hero-action {
+
+width: 100%;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+margin-top: 10px;
+
+}
+
+.birthday-cta {
+
+width: fit-content;
+
+min-width: 220px;
+
+height: 48px;
+
+padding: 0 22px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 8px;
+
+border: 2px solid var(--how-black);
+
+border-radius: 999px;
+
+background: var(--how-orange);
+
+color: var(--how-black);
+
+box-shadow: 4px 4px 0 var(--how-black);
+
+font-size: clamp(14px, 3.7vw, 16px);
+
+font-weight: 500;
+
+cursor: pointer;
+
+}
+
+.birthday-note {
+
+width: min(88vw, 370px);
+
+margin: 15px auto 0;
+
+color: var(--how-brown);
+
+text-align: center;
+
+font-size: clamp(12px, 3.25vw, 14px);
+
+font-weight: 500;
+
+line-height: 1.35;
+
+}
+
+/* =========================
+
+PAGE 2 / CHECK-IN — V5
+
+Fixed header flow + bounded paper + one safe-zone.
+
+\\\\========================= */
+
+.checkin-page {
+
+position: relative;
+
+width: 100%;
+
+height: 100dvh;
+
+min-height: 100dvh;
+
+overflow: hidden;
+
+background: var(--how-cream);
+
+color: var(--how-brown);
+
+isolation: isolate;
+
+}
+
+.checkin-page :is(input, select, button, a, p, span, label, h2) {
+
+font-family: var(--font-cda), sans-serif;
+
+font-weight: 500;
+
+}
+
+/* Decoration is one global layer behind ALL interactive UI. */
+
+.checkin-decor {
+
+position: absolute;
+
+z-index: 0;
+
+inset: 0;
+
+overflow: hidden;
+
+pointer-events: none;
+
+}
+
+.checkin-decor .decor {
+
+position: absolute !important;
+
+z-index: 0 !important;
+
+width: auto !important;
+
+height: auto !important;
+
+object-fit: contain;
+
+pointer-events: none !important;
+
+}
+
+.decor-star { top: 10%; right: -56px; max-width: 48px; }
+
+.decor-beans { top: 26%; left: -76px; max-width: 58px; }
+
+.decor-cup { right: -82px; bottom: 7%; max-width: 36px; }
+
+.decor-machine { left: -68px; bottom: 13%; max-width: 56px; }
+
+.decor-cake { right: -78px; top: 38%; max-width: 42px; }
+
+.decor-ribbon { left: -78px; top: 51%; max-width: 44px; }
+
+/* Header contains only back + logo. No overlap with the title flow. */
+
+.checkin-header {
+
+position: relative;
+
+z-index: 30;
+
+width: min(100%, 460px);
+
+height: 48px;
+
+margin-inline: auto;
+
+padding: max(7px, env(safe-area-inset-top)) 14px 0;
+
+display: grid;
+
+grid-template-columns: 30px 1fr 30px;
+
+align-items: start;
+
+pointer-events: none;
+
+}
+
+.checkin-header > \* { pointer-events: auto; }
+
+.checkin-header > img {
+
+width: 60px;
+
+height: auto;
+
+justify-self: center;
+
+object-fit: contain;
+
+}
+
+.checkin-back {
+
+width: 29px;
+
+height: 29px;
+
+padding: 0;
+
+display: grid;
+
+place-items: center;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 50%;
+
+background: var(--how-cream);
+
+color: var(--how-brown);
+
+font-size: 17px;
+
+cursor: pointer;
+
+}
+
+/* Explicit flow: logo/header -> gap -> birthday -> title -> subtitle -> gap -> paper. */
+
+.checkin-scene {
+
+position: relative;
+
+z-index: 10;
+
+width: min(100%, 460px);
+
+height: calc(100dvh - 48px);
+
+margin-inline: auto;
+
+padding: 9px 3px max(6px, env(safe-area-inset-bottom));
+
+display: grid;
+
+grid-template-rows: max-content minmax(0, 1fr);
+
+justify-items: center;
+
+align-items: stretch;
+
+}
+
+.checkin-title {
+
+width: 100%;
+
+margin: 0 0 10px;
+
+text-align: center;
+
+}
+
+.checkin-title p {
+
+margin: 0 0 6px;
+
+color: var(--how-orange);
+
+font-size: 9px;
+
+line-height: 1;
+
+letter-spacing: .13em;
+
+}
+
+.checkin-title h1 {
+
+margin: 0;
+
+color: var(--how-brown);
+
+font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+
+font-size: clamp(21px, 6.3vw, 27px);
+
+font-weight: 500;
+
+line-height: 1;
+
+}
+
+.checkin-title > span {
+
+display: block;
+
+margin-top: 5px;
+
+color: var(--how-brown);
+
+font-size: 9px;
+
+line-height: 1.15;
+
+}
+
+/* Paper can only occupy the remaining grid row. */
+
+.paper-wrap {
+
+position: relative;
+
+z-index: 5;
+
+width: min(91vw, 392px);
+
+height: 100%;
+
+min-height: 0;
+
+max-height: 100%;
+
+align-self: stretch;
+
+justify-self: center;
+
+isolation: isolate;
+
+}
+
+.paper-image {
+
+position: absolute !important;
+
+z-index: 0 !important;
+
+inset: 0 !important;
+
+width: 100% !important;
+
+height: 100% !important;
+
+object-fit: fill !important;
+
+pointer-events: none;
+
+}
+
+/* UI layer is always above paper illustration/clipboard/decorations. */
+
+.paper-content {
+
+--content-width: min(70%, 292px);
+
+--paper-top-safe: clamp(62px, 8.3vh, 70px);
+
+--control-h: clamp(38px, 4.9vh, 41px);
+
+--field-gap: 0px;
+
+--label-gap: 2px;
+
+--icon-size: 13px;
+
+--zalo-qr: clamp(44px, 5.9vh, 52px);
+
+--cta-h: clamp(40px, 5.1vh, 42px);
+
+position: relative;
+
+z-index: 20;
+
+width: var(--content-width);
+
+height: 100%;
+
+margin-inline: auto;
+
+padding: var(--paper-top-safe) 0 11px;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: stretch;
+
+}
+
+.checkin-fields {
+
+width: 100%;
+
+display: flex;
+
+flex-direction: column;
+
+gap: var(--field-gap);
+
+}
+
+.field-group {
+
+position: relative;
+
+width: 100%;
+
+display: grid;
+
+grid-template-rows: 10px var(--control-h) 8px;
+
+row-gap: var(--label-gap);
+
+color: var(--how-brown);
+
+}
+
+.field-group > span:not(.field-error) {
+
+display: block;
+
+margin: 0;
+
+color: var(--how-brown);
+
+font-size: 10px;
+
+line-height: 1;
+
+}
+
+.field-error {
+
+min-height: 8px;
+
+margin: 0;
+
+color: var(--how-orange);
+
+font-size: 6.5px;
+
+line-height: 8px;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+}
+
+.field-group.has-error .field-control input,
+
+.field-group.has-error .field-control select {
+
+border-color: var(--how-orange);
+
+}
+
+.field-control {
+
+position: relative;
+
+width: 100%;
+
+}
+
+.field-icon {
+
+position: absolute;
+
+z-index: 2;
+
+left: 11px;
+
+top: 50%;
+
+width: var(--icon-size);
+
+height: var(--icon-size);
+
+transform: translateY(-50%);
+
+fill: none;
+
+stroke: var(--how-brown);
+
+stroke-width: 1.7;
+
+stroke-linecap: round;
+
+stroke-linejoin: round;
+
+pointer-events: none;
+
+}
+
+.field-control input,
+
+.field-control select {
+
+display: block;
+
+width: 100%;
+
+height: var(--control-h);
+
+min-height: var(--control-h);
+
+margin: 0;
+
+padding: 0 10px 0 35px;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 12px;
+
+outline: 0;
+
+background: var(--how-cream);
+
+color: var(--how-brown);
+
+font-size: 9px;
+
+line-height: 1;
+
+}
+
+.field-control select { padding-right: 27px; }
+
+.field-control input::placeholder {
+
+color: var(--how-brown);
+
+opacity: .55;
+
+}
+
+.field-control input:focus,
+
+.field-control select:focus {
+
+border-color: var(--how-brown);
+
+outline: 1px solid var(--how-brown);
+
+outline-offset: 1px;
+
+}
+
+.field-control input,
+
+.field-control select,
+
+.field-control input:focus,
+
+.field-control select:focus,
+
+.field-control input:active,
+
+.field-control select:active {
+
+background: var(--how-cream);
+
+color: var(--how-brown);
+
+caret-color: var(--how-brown);
+
+}
+
+.field-control input:-webkit-autofill,
+
+.field-control input:-webkit-autofill:hover,
+
+.field-control input:-webkit-autofill:focus,
+
+.field-control input:-webkit-autofill:active {
+
+-webkit-text-fill-color: var(--how-brown) !important;
+
+caret-color: var(--how-brown) !important;
+
+box-shadow: 0 0 0 1000px var(--how-cream) inset !important;
+
+-webkit-box-shadow: 0 0 0 1000px var(--how-cream) inset !important;
+
+transition: background-color 9999s ease-out 0s;
+
+}
+
+/* Zalo card: QR gives width back to content; all copy remains readable. */
+
+.zalo-card {
+
+width: 100%;
+
+height: auto;
+
+margin-top: 6px;
+
+padding: 4px 5px;
+
+display: grid;
+
+grid-template-columns: var(--zalo-qr) 1px minmax(0, 1fr);
+
+gap: 6px;
+
+align-items: center;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 11px;
+
+background: var(--how-cream);
+
+}
+
+.zalo-qr {
+
+width: var(--zalo-qr);
+
+height: var(--zalo-qr);
+
+display: grid;
+
+place-items: center;
+
+}
+
+.zalo-qr img {
+
+display: block;
+
+width: var(--zalo-qr) !important;
+
+height: var(--zalo-qr) !important;
+
+object-fit: contain;
+
+}
+
+.zalo-divider {
+
+width: 1px;
+
+height: calc(var(--zalo-qr) - 2px);
+
+background: var(--how-brown);
+
+}
+
+.zalo-content {
+
+min-width: 0;
+
+align-self: center;
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+gap: 2px;
+
+}
+
+.zalo-content h2,
+
+.zalo-content p {
+
+margin: 0;
+
+color: var(--how-brown);
+
+font-weight: 500;
+
+}
+
+.zalo-content h2 {
+
+font-size: 8.5px;
+
+line-height: 1.12;
+
+}
+
+.zalo-content p {
+
+font-size: 7.2px;
+
+line-height: 1.15;
+
+}
+
+.zalo-content a {
+
+width: fit-content;
+
+max-width: 100%;
+
+min-height: 22px;
+
+padding: 0 7px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 999px;
+
+background: var(--how-brown);
+
+color: var(--how-cream);
+
+font-size: 7px;
+
+line-height: 1;
+
+text-decoration: none;
+
+}
+
+.zalo-confirm {
+
+width: 100%;
+
+display: flex;
+
+align-items: center;
+
+gap: 4px;
+
+color: var(--how-brown);
+
+font-size: 6.8px;
+
+line-height: 1.1;
+
+white-space: nowrap;
+
+}
+
+.zalo-confirm input {
+
+appearance: none;
+
+-webkit-appearance: none;
+
+flex: 0 0 11px;
+
+width: 11px;
+
+height: 11px;
+
+margin: 0;
+
+border: 1px solid var(--how-brown);
+
+border-radius: 3px;
+
+background: var(--how-cream);
+
+}
+
+.zalo-confirm input:checked {
+
+display: grid;
+
+place-items: center;
+
+border-color: var(--how-orange);
+
+background: var(--how-orange);
+
+}
+
+.zalo-confirm input:checked::after {
+
+content: "✓";
+
+color: var(--how-black);
+
+font-size: 7px;
+
+line-height: 1;
+
+}
+
+.privacy-note {
+
+min-height: 16px;
+
+margin: 4px 0 0;
+
+color: var(--how-brown);
+
+text-align: center;
+
+font-size: 6.3px;
+
+font-weight: 500;
+
+line-height: 1.2;
+
+}
+
+/* Dedicated CTA exclusion zone: no decoration exists in this stacking layer. */
+
+.play-button {
+
+position: relative;
+
+z-index: 30;
+
+align-self: center;
+
+width: clamp(220px, 84%, 238px);
+
+height: var(--cta-h);
+
+min-height: var(--cta-h);
+
+margin: 4px auto 0;
+
+padding: 0 18px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 6px;
+
+border: 2px solid var(--how-brown);
+
+border-radius: 999px;
+
+background: var(--how-orange);
+
+color: var(--how-brown);
+
+box-shadow: 3px 3px 0 var(--how-brown);
+
+font-size: 10px;
+
+line-height: 1;
+
+white-space: nowrap;
+
+cursor: pointer;
+
+}
+
+.play-button:disabled {
+
+opacity: .78;
+
+color: var(--how-brown);
+
+background: var(--how-orange);
+
+border-color: var(--how-brown);
+
+box-shadow: 3px 3px 0 var(--how-brown);
+
+cursor: not-allowed;
+
+}
+
+.checkin-message {
+
+min-height: 8px;
+
+margin: 1px 0 0;
+
+color: var(--how-brown);
+
+text-align: center;
+
+font-size: 6.5px;
+
+line-height: 1.1;
+
+}
+
+/* Persistent sound stays top-right, outside the paper. */
+
+body:has(.checkin-page) .audio-toggle {
+
+top: max(9px, env(safe-area-inset-top));
+
+right: max(12px, env(safe-area-inset-right));
+
+bottom: auto;
+
+width: 30px;
+
+height: 30px;
+
+z-index: 100;
+
+}
+
+/* Only shared composition variables change on short screens. No text is removed. */
+
+@media (max-width: 430px) and (max-height: 740px) {
+
+.checkin-header { height: 44px; }
+
+.checkin-header > img { width: 56px; }
+
+.checkin-scene {
+
+    height: calc(100dvh - 44px);
+
+    padding-top: 8px;
+
+}
+
+.checkin-title { margin-bottom: 8px; }
+
+.checkin-title h1 { font-size: clamp(20px, 6vw, 25px); }
+
+.paper-wrap { width: min(90vw, 382px); }
+
+.paper-content {
+
+    --paper-top-safe: clamp(55px, 7.4vh, 61px);
+
+    --control-h: clamp(35px, 4.7vh, 38px);
+
+    --field-gap: 0px;
+
+    --zalo-qr: clamp(40px, 5.4vh, 46px);
+
+    --cta-h: clamp(36px, 4.8vh, 39px);
+
+    padding-bottom: 10px;
+
+}
+
+.zalo-content a { min-height: 20px; }
+
+.play-button { margin-top: 3px; }
+
+}
+
+@media (max-width: 430px) and (max-height: 660px) {
+
+.checkin-header { height: 42px; }
+
+.checkin-header > img { width: 54px; }
+
+.checkin-scene {
+
+    height: calc(100dvh - 42px);
+
+    padding-top: 6px;
+
+}
+
+.checkin-title {
+
+    margin-bottom: 7px;
+
+}
+
+.checkin-title p { margin-bottom: 5px; }
+
+.checkin-title > span { margin-top: 4px; }
+
+.paper-content {
+
+    --paper-top-safe: 52px;
+
+    --control-h: 34px;
+
+    --field-gap: 0px;
+
+    --zalo-qr: 38px;
+
+    --cta-h: 35px;
+
+    padding-bottom: 9px;
+
+}
+
+.zalo-card {
+
+    margin-top: 6px;
+
+    padding: 5px;
+
+}
+
+.zalo-content a { min-height: 19px; }
+
+.play-button { margin-top: 3px; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+.confetti-canvas { display: none; }
+
+}
+
+/* ===== CHECK-IN: CHO PHÉP CUỘN DỌC — FINAL ===== */
+
+.checkin-page {
+
+height: auto !important;
+
+min-height: 100dvh !important;
+
+overflow-x: hidden !important;
+
+overflow-y: auto !important;
+
+}
+
+/* Decoration vẫn thuộc riêng check-in page. */
+
+.checkin-decor {
+
+position: absolute;
+
+inset: 0;
+
+}
+
+/* Không khóa scene vào đúng 1 viewport nữa. */
+
+.checkin-scene {
+
+height: auto !important;
+
+min-height: calc(100dvh - 48px) !important;
+
+grid-template-rows: max-content max-content !important;
+
+padding-bottom: max(24px, env(safe-area-inset-bottom)) !important;
+
+}
+
+/* Paper phải có chiều cao thật để chứa Zalo + privacy + CTA. */
+
+.paper-wrap {
+
+height: auto !important;
+
+max-height: none !important;
+
+align-self: start !important;
+
+}
+
+/* Content đi theo chiều cao paper, không bị cắt ở đáy viewport. */
+
+.paper-content {
+
+height: auto !important;
+
+padding-bottom: 24px !important;
+
+}
+
+/* CTA luôn ở normal flow và có giấy phía dưới. */
+
+.play-button {
+
+position: relative !important;
+
+flex: 0 0 auto !important;
+
+margin-top: 6px !important;
+
+margin-bottom: 12px !important;
+
+}
+
+/* Mobile thấp vẫn cuộn, không ép paper trở lại 100dvh. */
+
+@media (max-width: 430px) and (max-height: 740px) {
+
+.checkin-scene {
+
+    height: auto !important;
+
+    min-height: calc(100dvh - 44px) !important;
+
+}
+
+}
+
+@media (max-width: 430px) and (max-height: 660px) {
+
+.checkin-scene {
+
+    height: auto !important;
+
+    min-height: calc(100dvh - 42px) !important;
+
+}
+
+}
+
+/* ===== CHECK-IN CONTENT / ERROR / PAPER FIX — FINAL ===== */
+
+/* Let the paper height follow content instead of forcing a stretched 600px sheet. */
+
+.checkin-page .paper-wrap {
+
+height: auto !important;
+
+min-height: 0 !important;
+
+max-height: none !important;
+
+}
+
+/* Keep content below the clipboard and reserve illustration space below CTA. */
+
+.checkin-page .paper-content {
+
+--paper-top-safe: 104px;
+
+--field-gap: 6px;
+
+height: auto !important;
+
+min-height: 0 !important;
+
+padding: var(--paper-top-safe) 0 72px !important;
+
+}
+
+/* Give labels / controls / validation their own stable rows. */
+
+.checkin-page .field-group {
+
+grid-template-rows: 12px var(--control-h) 14px;
+
+row-gap: 3px;
+
+}
+
+.checkin-page .field-error {
+
+min-height: 14px;
+
+height: 14px;
+
+margin: 0;
+
+color: var(--how-orange);
+
+font-size: 10px;
+
+line-height: 14px;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+}
+
+/* Keep secondary copy readable now that check-in is allowed to scroll. */
+
+.checkin-page .zalo-content h2 {
+
+font-size: 10px;
+
+line-height: 1.15;
+
+}
+
+.checkin-page .zalo-content p {
+
+font-size: 10px;
+
+line-height: 1.2;
+
+}
+
+.checkin-page .zalo-confirm {
+
+font-size: 10px;
+
+line-height: 1.15;
+
+}
+
+.checkin-page .privacy-note {
+
+font-size: 10px;
+
+line-height: 1.25;
+
+min-height: 0;
+
+margin-top: 6px;
+
+}
+
+/* Keep the CTA in normal flow with a controlled amount of paper beneath it. */
+
+.checkin-page .play-button {
+
+margin-top: 8px !important;
+
+margin-bottom: 0 !important;
+
+}
+
+/* Mobile media queries must not pull the content back under the clipboard. */
+
+@media (max-width: 430px) and (max-height: 740px) {
+
+.checkin-page .paper-content {
+
+    --paper-top-safe: 104px;
+
+    --field-gap: 6px;
+
+    padding-bottom: 64px !important;
+
+}
+
+}
+
+@media (max-width: 430px) and (max-height: 660px) {
+
+.checkin-page .paper-content {
+
+    --paper-top-safe: 104px;
+
+    --field-gap: 6px;
+
+    padding-bottom: 58px !important;
+
+}
+
+}
+
+/* =========================================================
+
+   PAGE 1 ONLY — FIX HEADLINE / CAKE OVERLAP
+
+   Keep Page 2 untouched.
+
+   ========================================================= */
+
+.birthday-page .hero-content {
+
+  justify-content: flex-start;
+
+  padding-top: max(70px, calc(env(safe-area-inset-top) + 62px));
+
+}
+
+.birthday-page .hero-artwork {
+
+  flex: 0 1 auto;
+
+  min-height: 0;
+
+}
+
+.birthday-page .headline {
+
+  flex: 0 0 auto;
+
+  margin-bottom: 8px;
+
+}
+
+.birthday-page .headline-row {
+
+  flex-wrap: wrap;
+
+  row-gap: 0;
+
+}
+
+.birthday-page .headline-brand {
+
+  position: relative;
+
+  z-index: 9;
+
+  margin-top: 5px;
+
+  line-height: 1.15;
+
+}
+
+.birthday-page .cake-stage {
+
+  flex: 0 1 auto;
+
+  width: min(88vw, 440px);
+
+  margin-top: 4px;
+
+  min-height: 0;
+
+}
+
+.birthday-page .birthday-cake {
+
+  width: 100%;
+
+  max-height: min(48dvh, 470px);
+
+  object-fit: contain;
+
+}
+
+.birthday-page .hero-action {
+
+  flex: 0 0 auto;
+
+  margin-top: 4px;
+
+}
+
+.birthday-page .birthday-note {
+
+  margin-top: 13px;
+
+}
+
+/* Short mobile screens: reserve title space first, then shrink ONLY the cake. */
+
+@media (max-width: 430px) and (max-height: 740px) {
+
+  .birthday-page .hero-content {
+
+    padding-top: max(62px, calc(env(safe-area-inset-top) + 54px));
+
+  }
+
+  .birthday-page .headline {
+
+    margin-bottom: 6px;
+
+  }
+
+  .birthday-page .cake-stage {
+
+    width: min(82vw, 390px);
+
+    margin-top: 2px;
+
+  }
+
+  .birthday-page .birthday-cake {
+
+    max-height: 43dvh;
+
+  }
+
+  .birthday-page .hero-action {
+
+    margin-top: 2px;
+
+  }
+
+}
+
+@media (max-width: 430px) and (max-height: 660px) {
+
+  .birthday-page .hero-content {
+
+    padding-top: max(58px, calc(env(safe-area-inset-top) + 50px));
+
+  }
+
+  .birthday-page .headline-happy,
+
+  .birthday-page .headline h1 {
+
+    font-size: clamp(27px, 8.4vw, 38px);
+
+  }
+
+  .birthday-page .sixth {
+
+    font-size: clamp(28px, 8.7vw, 40px);
+
+  }
+
+  .birthday-page .headline-brand {
+
+    margin-top: 3px;
+
+  }
+
+  .birthday-page .cake-stage {
+
+    width: min(78vw, 360px);
+
+  }
+
+  .birthday-page .birthday-cake {
+
+    max-height: 40dvh;
+
+  }
+
+}
+
+/* =========================================================
+
+   CHECK-IN DECOR + SLIDE TO PLAY — FINAL OVERRIDE
+
+   Mobile-first / one-screen composition.
+
+   ========================================================= */
+
+.checkin-page {
+
+  overflow: hidden !important;
+
+}
+
+.checkin-decor {
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 0 !important;
+
+  overflow: hidden !important;
+
+  pointer-events: none !important;
+
+}
+
+.checkin-decor .decor {
+
+  position: absolute !important;
+
+  z-index: 0 !important;
+
+  width: auto !important;
+
+  height: auto !important;
+
+  object-fit: contain !important;
+
+  pointer-events: none !important;
+
+  user-select: none !important;
+
+}
+
+.checkin-decor .decor-cake {
+
+  right: -50px !important;
+
+  bottom: 2% !important;
+
+  max-width: 118px !important;
+
+}
+
+.checkin-decor .decor-machine {
+
+  left: -45px !important;
+
+  bottom: 4% !important;
+
+  max-width: 96px !important;
+
+}
+
+.checkin-decor .decor-ribbon {
+
+  left: -30px !important;
+
+  top: 41% !important;
+
+  max-width: 72px !important;
+
+  animation: checkinDecorFloat 7s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-star {
+
+  right: 7px !important;
+
+  top: 8% !important;
+
+  max-width: 35px !important;
+
+  transform-origin: 50% 0 !important;
+
+  animation: checkinDecorSwing 5s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-beans {
+
+  left: 5px !important;
+
+  top: 21% !important;
+
+  max-width: 41px !important;
+
+  animation: checkinDecorFloat 8s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-beans-2 {
+
+  right: -13px !important;
+
+  left: auto !important;
+
+  top: 47% !important;
+
+  max-width: 33px !important;
+
+  animation: checkinDecorFloat 8.5s ease-in-out infinite !important;
+
+}
+
+.checkin-page .paper-content {
+
+  --paper-top-safe: 100px;
+
+  z-index: 20 !important;
+
+}
+
+.slide-track {
+
+  position: relative;
+
+  z-index: 30;
+
+  align-self: center;
+
+  flex: 0 0 auto;
+
+  width: clamp(220px, 84%, 238px);
+
+  height: 42px;
+
+  margin: 4px auto 0;
+
+  border: 2px solid var(--how-brown);
+
+  border-radius: 999px;
+
+  background: var(--how-cream);
+
+  overflow: hidden;
+
+  touch-action: none;
+
+}
+
+.slide-track.is-disabled {
+
+  opacity: .6;
+
+  cursor: not-allowed;
+
+}
+
+.slide-fill {
+
+  position: absolute;
+
+  inset: 0 auto 0 0;
+
+  background: var(--how-orange);
+
+  pointer-events: none;
+
+}
+
+.slide-label {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  padding-left: 32px;
+
+  color: var(--how-brown);
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: .02em;
+
+  pointer-events: none;
+
+  white-space: nowrap;
+
+}
+
+.slide-thumb {
+
+  position: absolute;
+
+  top: 1px;
+
+  left: 1px;
+
+  width: 36px;
+
+  height: 36px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 2px solid var(--how-brown);
+
+  border-radius: 50%;
+
+  background: var(--how-orange);
+
+  color: var(--how-brown);
+
+  font-size: 18px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  cursor: grab;
+
+  touch-action: none;
+
+  user-select: none;
+
+  will-change: transform;
+
+  transition: transform .18s ease;
+
+}
+
+.slide-thumb:active {
+
+  cursor: grabbing;
+
+  transition: none;
+
+}
+
+@keyframes checkinDecorSwing {
+
+  0%, 100% { transform: rotate(-4deg); }
+
+  50% { transform: rotate(4deg); }
+
+}
+
+@keyframes checkinDecorFloat {
+
+  0%, 100% { transform: translateY(0); }
+
+  50% { transform: translateY(-4px); }
+
+}
+
+@media (max-width: 390px), (max-height: 760px) {
+
+  .checkin-page .paper-content {
+
+    --paper-top-safe: 94px;
+
+  }
+
+  .checkin-decor .decor-cake {
+
+    right: -54px !important;
+
+    max-width: 108px !important;
+
+  }
+
+  .checkin-decor .decor-machine {
+
+    left: -48px !important;
+
+    max-width: 88px !important;
+
+  }
+
+  .slide-track {
+
+    height: 40px;
+
+    width: clamp(214px, 82%, 232px);
+
+  }
+
+  .slide-thumb {
+
+    width: 34px;
+
+    height: 34px;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .decor {
+
+    animation: none !important;
+
+  }
+
+  .slide-thumb {
+
+    transition: none !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 DECOR — CLEAN BIRTHDAY INVITATION / FINAL
+
+   No coffee beans. No ribbon. Paper safe-zone is unchanged.
+
+   ========================================================= */
+
+.checkin-decor .decor-beans,
+
+.checkin-decor .decor-beans-2,
+
+.checkin-decor .decor-ribbon {
+
+  display: none !important;
+
+}
+
+/* Keep paper/form geometry untouched. Decoration stays outside content safe-zone. */
+
+.checkin-decor .decor-star {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  left: auto !important;
+
+  bottom: auto !important;
+
+  width: auto !important;
+
+  height: auto !important;
+
+  object-fit: contain !important;
+
+  pointer-events: none !important;
+
+  transform-origin: 50% 0 !important;
+
+  will-change: transform, opacity, filter;
+
+}
+
+/* Hanging star cluster — background top/right only */
+
+.checkin-decor .decor-star-1 {
+
+  top: 5.5% !important;
+
+  right: 7px !important;
+
+  max-width: 36px !important;
+
+  animation:
+
+    howStarSwing1 5.2s ease-in-out infinite,
+
+    howStarGlow 2.8s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-star-2 {
+
+  top: 11.5% !important;
+
+  right: 49px !important;
+
+  max-width: 24px !important;
+
+  opacity: .92;
+
+  animation:
+
+    howStarSwing2 6.2s ease-in-out .35s infinite,
+
+    howStarGlow 3.4s ease-in-out .6s infinite !important;
+
+}
+
+.checkin-decor .decor-star-3 {
+
+  top: 17% !important;
+
+  right: 15px !important;
+
+  max-width: 18px !important;
+
+  opacity: .82;
+
+  animation:
+
+    howStarSwing3 5.8s ease-in-out .8s infinite,
+
+    howStarGlow 3.1s ease-in-out 1.1s infinite !important;
+
+}
+
+/* Cake is the only lower decoration; keep CTA area visually clean. */
+
+.checkin-decor .decor-cake {
+
+  right: -58px !important;
+
+  bottom: 7% !important;
+
+  max-width: 108px !important;
+
+}
+
+/* Machine is intentionally removed visually on Page 2 for a cleaner invitation look. */
+
+.checkin-decor .decor-machine,
+
+.checkin-decor .decor-cup {
+
+  display: none !important;
+
+}
+
+@keyframes howStarSwing1 {
+
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+
+  50% { transform: rotate(4deg) scale(1.08); }
+
+}
+
+@keyframes howStarSwing2 {
+
+  0%, 100% { transform: rotate(3deg) scale(.94); }
+
+  50% { transform: rotate(-4deg) scale(1.10); }
+
+}
+
+@keyframes howStarSwing3 {
+
+  0%, 100% { transform: rotate(-3deg) scale(.92); }
+
+  50% { transform: rotate(4deg) scale(1.12); }
+
+}
+
+@keyframes howStarGlow {
+
+  0%, 100% {
+
+    opacity: .72;
+
+    filter: brightness(.96) drop-shadow(0 0 0 rgba(255, 106, 66, 0));
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+    filter: brightness(1.12) drop-shadow(0 0 5px rgba(255, 106, 66, .42));
+
+  }
+
+}
+
+/* Slide CTA gets a completely clean breathing zone. */
+
+.slide-track {
+
+  isolation: isolate;
+
+}
+
+@media (max-width: 390px), (max-height: 760px) {
+
+  .checkin-decor .decor-star-1 {
+
+    right: 5px !important;
+
+    max-width: 32px !important;
+
+  }
+
+  .checkin-decor .decor-star-2 {
+
+    right: 42px !important;
+
+    max-width: 21px !important;
+
+  }
+
+  .checkin-decor .decor-star-3 {
+
+    right: 12px !important;
+
+    max-width: 16px !important;
+
+  }
+
+  .checkin-decor .decor-cake {
+
+    right: -60px !important;
+
+    bottom: 8% !important;
+
+    max-width: 100px !important;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .decor-star {
+
+    animation: none !important;
+
+    filter: none !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 — UPPER-RIGHT 6TH BIRTHDAY CAKE / FINAL OVERRIDE
+
+   Cake replaces the former vertical star cluster.
+
+   Paper/form geometry and safe-zone stay untouched.
+
+   ========================================================= */
+
+/* Keep beans/ribbon permanently removed. */
+
+.checkin-decor .decor-beans,
+
+.checkin-decor .decor-beans-2,
+
+.checkin-decor .decor-ribbon {
+
+  display: none !important;
+
+}
+
+/* Main birthday cue: large cake entering from upper-right negative space. */
+
+.checkin-decor .decor-cake {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  z-index: 1 !important;
+
+  top: clamp(128px, 17.5vh, 166px) !important;
+
+  right: clamp(-74px, -17vw, -58px) !important;
+
+  bottom: auto !important;
+
+  width: clamp(150px, 42vw, 184px) !important;
+
+  max-width: none !important;
+
+  height: auto !important;
+
+  object-fit: contain !important;
+
+  /* No motion: the cake is the visual anchor. */
+
+  animation: none !important;
+
+  transform: none !important;
+
+  filter: none !important;
+
+  pointer-events: none !important;
+
+}
+
+/* Only two small stars remain as accents around the cake. */
+
+.checkin-decor .decor-star-1 {
+
+  top: clamp(112px, 14.5vh, 140px) !important;
+
+  right: 12px !important;
+
+  max-width: 24px !important;
+
+  z-index: 2 !important;
+
+  animation:
+
+    howStarSwing1 5.4s ease-in-out infinite,
+
+    howStarGlow 3s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-star-2 {
+
+  top: clamp(172px, 22vh, 204px) !important;
+
+  right: clamp(104px, 27vw, 122px) !important;
+
+  max-width: 16px !important;
+
+  z-index: 2 !important;
+
+  opacity: .86;
+
+  animation:
+
+    howStarSwing2 6.2s ease-in-out .5s infinite,
+
+    howStarGlow 3.5s ease-in-out .8s infinite !important;
+
+}
+
+.checkin-decor .decor-star-3 {
+
+  display: none !important;
+
+}
+
+/*
+
+  IMPORTANT:
+
+  - Do not move .paper-wrap, .paper-content, .checkin-title or form fields.
+
+  - Cake stays in decoration layer behind content.
+
+  - 6 candle remains inside viewport because crop is applied from the cake's right side only.
+
+*/
+
+.checkin-title,
+
+.checkin-header,
+
+.paper-wrap {
+
+  position: relative;
+
+  z-index: 10;
+
+}
+
+.paper-content {
+
+  z-index: 20 !important;
+
+}
+
+/* Narrow phones: preserve the 6 and show \\\~55–65% of cake. */
+
+@media (max-width: 390px) {
+
+  .checkin-decor .decor-cake {
+
+    top: clamp(126px, 17vh, 154px) !important;
+
+    right: -64px !important;
+
+    width: clamp(148px, 43vw, 168px) !important;
+
+  }
+
+  .checkin-decor .decor-star-1 {
+
+    right: 8px !important;
+
+    max-width: 21px !important;
+
+  }
+
+  .checkin-decor .decor-star-2 {
+
+    right: 96px !important;
+
+    max-width: 14px !important;
+
+  }
+
+}
+
+/* Short screens: keep cake above inputs rather than pushing content. */
+
+@media (max-height: 760px) {
+
+  .checkin-decor .decor-cake {
+
+    top: 122px !important;
+
+    width: 150px !important;
+
+    right: -58px !important;
+
+  }
+
+  .checkin-decor .decor-star-1 {
+
+    top: 108px !important;
+
+  }
+
+  .checkin-decor .decor-star-2 {
+
+    top: 164px !important;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .decor-star {
+
+    animation: none !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 — APPROVED REFERENCE COMPOSITION
+
+   Clean invitation card: cake upper-right + 2 hanging stars.
+
+   ========================================================= */
+
+.checkin-decor .decor-beans,
+
+.checkin-decor .decor-beans-2,
+
+.checkin-decor .decor-ribbon,
+
+.checkin-decor .decor-machine,
+
+.checkin-decor .decor-cup {
+
+  display: none !important;
+
+}
+
+/* Large cake: upper-right, slightly tilted, behind content.
+
+   Crop only on the right; keep candle/6 readable. */
+
+.checkin-decor .decor-cake {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  z-index: 1 !important;
+
+  top: clamp(158px, 21vh, 196px) !important;
+
+  right: clamp(-66px, -15vw, -48px) !important;
+
+  bottom: auto !important;
+
+  left: auto !important;
+
+  width: clamp(160px, 43vw, 188px) !important;
+
+  max-width: none !important;
+
+  height: auto !important;
+
+  object-fit: contain !important;
+
+  transform: rotate(4deg) !important;
+
+  transform-origin: center center !important;
+
+  animation: none !important;
+
+  pointer-events: none !important;
+
+}
+
+/* Two hanging stars only; deliberately kept to the far-right background. */
+
+.checkin-decor .decor-star {
+
+  position: absolute !important;
+
+  z-index: 2 !important;
+
+  left: auto !important;
+
+  bottom: auto !important;
+
+  width: auto !important;
+
+  height: auto !important;
+
+  object-fit: contain !important;
+
+  transform-origin: 50% -28px !important;
+
+  pointer-events: none !important;
+
+  will-change: transform, opacity, filter;
+
+}
+
+.checkin-decor .decor-star-1 {
+
+  top: 82px !important;
+
+  right: 16px !important;
+
+  max-width: 29px !important;
+
+  animation:
+
+    approvedStarSwingA 5.4s ease-in-out infinite,
+
+    approvedStarShimmer 2.8s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .decor-star-2 {
+
+  top: 120px !important;
+
+  right: 70px !important;
+
+  max-width: 20px !important;
+
+  opacity: .9;
+
+  animation:
+
+    approvedStarSwingB 6.3s ease-in-out .55s infinite,
+
+    approvedStarShimmer 3.5s ease-in-out .75s infinite !important;
+
+}
+
+.checkin-decor .decor-star-3 {
+
+  display: none !important;
+
+}
+
+@keyframes approvedStarSwingA {
+
+  0%, 100% { transform: rotate(-5deg) scale(.96); }
+
+  50%      { transform: rotate(5deg) scale(1.10); }
+
+}
+
+@keyframes approvedStarSwingB {
+
+  0%, 100% { transform: rotate(4deg) scale(.92); }
+
+  50%      { transform: rotate(-5deg) scale(1.12); }
+
+}
+
+@keyframes approvedStarShimmer {
+
+  0%, 100% {
+
+    opacity: .68;
+
+    filter: brightness(.95) drop-shadow(0 0 0 rgba(255,106,66,0));
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+    filter: brightness(1.16) drop-shadow(0 0 7px rgba(255,106,66,.48));
+
+  }
+
+}
+
+/* Typography lock: everything Medium 500 except the handwritten title. */
+
+.checkin-page,
+
+.checkin-page button,
+
+.checkin-page input,
+
+.checkin-page select,
+
+.checkin-page label,
+
+.checkin-page p,
+
+.checkin-page span,
+
+.checkin-page .eyebrow,
+
+.checkin-page .field-label,
+
+.checkin-page .zalo-copy,
+
+.checkin-page .privacy-copy,
+
+.checkin-page .slide-label {
+
+  font-weight: 500 !important;
+
+}
+
+.checkin-page .checkin-title {
+
+  font-family: "Playwrite CU", cursive !important;
+
+  font-weight: 400 !important;
+
+}
+
+/* Content stays above decorations; geometry is intentionally unchanged. */
+
+.checkin-header,
+
+.checkin-page .eyebrow,
+
+.checkin-page .checkin-title,
+
+.checkin-page .checkin-subtitle,
+
+.paper-wrap,
+
+.paper-content {
+
+  position: relative;
+
+  z-index: 10;
+
+}
+
+.paper-content {
+
+  z-index: 20 !important;
+
+}
+
+/* Keep title/subtitle clean: no decoration can intrude into the central text zone. */
+
+.checkin-page .checkin-title,
+
+.checkin-page .checkin-subtitle {
+
+  max-width: calc(100% - 32px);
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+}
+
+/* Compact phones: cake remains recognisable and the 6 stays in viewport. */
+
+@media (max-width: 390px) {
+
+  .checkin-decor .decor-cake {
+
+    top: 154px !important;
+
+    right: -56px !important;
+
+    width: 164px !important;
+
+    transform: rotate(4deg) !important;
+
+  }
+
+  .checkin-decor .decor-star-1 {
+
+    top: 78px !important;
+
+    right: 10px !important;
+
+    max-width: 25px !important;
+
+  }
+
+  .checkin-decor .decor-star-2 {
+
+    top: 112px !important;
+
+    right: 58px !important;
+
+    max-width: 17px !important;
+
+  }
+
+}
+
+@media (max-height: 760px) {
+
+  .checkin-decor .decor-cake {
+
+    top: 146px !important;
+
+    right: -52px !important;
+
+    width: 154px !important;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .decor-star {
+
+    animation: none !important;
+
+    filter: none !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 — CAKE VISIBILITY + STAR HEIGHT HOTFIX
+
+   Based on latest visual review.
+
+   ========================================================= */
+
+/* Raise the hanging stars so they sit clearly in the upper negative space. */
+
+.checkin-decor .decor-star-1 {
+
+  top: 62px !important;
+
+  right: 15px !important;
+
+}
+
+.checkin-decor .decor-star-2 {
+
+  top: 101px !important;
+
+  right: 67px !important;
+
+}
+
+/*
+
+  Reveal the cake properly:
+
+  - move it LEFT substantially so \\\~65–75% is visible;
+
+  - move it slightly UP;
+
+  - enlarge it a little;
+
+  - keep the 6/candle fully inside the viewport;
+
+  - keep it behind content and outside the title/subtitle center.
+
+*/
+
+.checkin-decor .decor-cake {
+
+  top: clamp(142px, 18.5vh, 168px) !important;
+
+  right: clamp(-34px, -7vw, -22px) !important;
+
+  width: clamp(174px, 46vw, 202px) !important;
+
+  max-width: none !important;
+
+  bottom: auto !important;
+
+  transform: rotate(3deg) !important;
+
+  z-index: 1 !important;
+
+}
+
+/* Keep the form/paper exactly where it is. */
+
+.paper-wrap,
+
+.paper-content {
+
+  transform: none;
+
+}
+
+/* Small phones: prioritize showing the 6 and upper cake instead of cropping it away. */
+
+@media (max-width: 390px) {
+
+  .checkin-decor .decor-star-1 {
+
+    top: 58px !important;
+
+    right: 9px !important;
+
+  }
+
+  .checkin-decor .decor-star-2 {
+
+    top: 94px !important;
+
+    right: 57px !important;
+
+  }
+
+  .checkin-decor .decor-cake {
+
+    top: 138px !important;
+
+    right: -24px !important;
+
+    width: 178px !important;
+
+    transform: rotate(3deg) !important;
+
+  }
+
+}
+
+@media (max-height: 760px) {
+
+  .checkin-decor .decor-cake {
+
+    top: 134px !important;
+
+    right: -22px !important;
+
+    width: 170px !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 — HANGING STARS FORMAT / FINAL OVERRIDE
+
+   ========================================================= */
+
+/* ===== BÁNH: góc trên phải, ló khỏi mép, đĩa chui sau giấy ===== */
+
+.checkin-decor .decor-cake {
+
+  position: absolute !important;
+
+  top: 13% !important;
+
+  right: -34px !important;
+
+  bottom: auto !important;
+
+  left: auto !important;
+
+  width: auto !important;
+
+  max-width: 150px !important;
+
+  height: auto !important;
+
+  transform: rotate(3deg) !important;
+
+  animation: none !important;
+
+  z-index: 1 !important;
+
+  pointer-events: none !important;
+
+}
+
+/* ===== SAO TREO ===== */
+
+.checkin-decor .hang {
+
+  position: absolute;
+
+  top: 0;
+
+  width: 0;
+
+  height: var(--len);
+
+  z-index: 2;
+
+  transform-origin: top center;
+
+  animation: hangSwing 6s ease-in-out infinite;
+
+  pointer-events: none;
+
+  will-change: transform;
+
+}
+
+.checkin-decor .hang::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 1px;
+
+  height: 100%;
+
+  background: var(--how-brown);
+
+  opacity: .35;
+
+}
+
+.checkin-decor .hang .decor {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  top: var(--len) !important;
+
+  left: 0 !important;
+
+  right: auto !important;
+
+  bottom: auto !important;
+
+  width: auto !important;
+
+  height: auto !important;
+
+  transform: translateX(-50%) !important;
+
+  transform-origin: center !important;
+
+  object-fit: contain !important;
+
+  pointer-events: none !important;
+
+  animation: hangStarGlow 3.2s ease-in-out infinite !important;
+
+}
+
+.checkin-decor .hang-1 {
+
+  right: 12%;
+
+  --len: 7vh;
+
+}
+
+.checkin-decor .hang-1 .decor {
+
+  max-width: 38px !important;
+
+}
+
+.checkin-decor .hang-2 {
+
+  right: 26%;
+
+  --len: 12vh;
+
+  animation-delay: -2s;
+
+}
+
+.checkin-decor .hang-2 .decor {
+
+  max-width: 28px !important;
+
+  animation-delay: -.8s !important;
+
+}
+
+.checkin-decor .hang-3 {
+
+  right: 19%;
+
+  --len: 4vh;
+
+  animation-delay: -4s;
+
+}
+
+.checkin-decor .hang-3 .decor {
+
+  max-width: 22px !important;
+
+  animation-delay: -1.6s !important;
+
+}
+
+@keyframes hangSwing {
+
+  0%, 100% { transform: rotate(-4deg); }
+
+  50%      { transform: rotate(4deg); }
+
+}
+
+/* Lấp lánh + zoom rất nhẹ, không làm lệch vị trí đầu dây */
+
+@keyframes hangStarGlow {
+
+  0%, 100% {
+
+    opacity: .72;
+
+    filter: brightness(.96) drop-shadow(0 0 0 rgba(255, 106, 66, 0));
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+    filter: brightness(1.14) drop-shadow(0 0 6px rgba(255, 106, 66, .42));
+
+  }
+
+}
+
+/* Disable old free-floating star rules. */
+
+.checkin-decor > .decor-star,
+
+.checkin-decor .decor-star-1,
+
+.checkin-decor .decor-star-2,
+
+.checkin-decor .decor-star-3 {
+
+  display: none !important;
+
+}
+
+/* Beans/ribbon stay removed. */
+
+.checkin-decor .decor-beans,
+
+.checkin-decor .decor-beans-2,
+
+.checkin-decor .decor-ribbon {
+
+  display: none !important;
+
+}
+
+@media (max-width: 390px) {
+
+  .checkin-decor .decor-cake {
+
+    top: 13% !important;
+
+    right: -34px !important;
+
+    max-width: 150px !important;
+
+  }
+
+  .checkin-decor .hang-1 { right: 10%; --len: 6vh; }
+
+  .checkin-decor .hang-2 { right: 25%; --len: 10vh; }
+
+  .checkin-decor .hang-3 { right: 17%; --len: 3.5vh; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .hang,
+
+  .checkin-decor .hang .decor {
+
+    animation: none !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   PAGE 2 — 6 HANGING STARS / BALANCED FINAL COMPOSITION
+
+   3 left + 3 right. Center/title safe-zone stays empty.
+
+   ========================================================= */
+
+.checkin-decor .hang {
+
+  position: absolute !important;
+
+  top: 0 !important;
+
+  width: 0 !important;
+
+  height: var(--len) !important;
+
+  z-index: 2 !important;
+
+  transform-origin: top center !important;
+
+  animation: sixStarSwing var(--swing-time, 6s) ease-in-out infinite !important;
+
+  animation-delay: var(--swing-delay, 0s) !important;
+
+  pointer-events: none !important;
+
+  will-change: transform;
+
+}
+
+.checkin-decor .hang::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 1px;
+
+  height: 100%;
+
+  background: var(--how-brown);
+
+  opacity: .28;
+
+}
+
+.checkin-decor .hang .decor-hang-star {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  top: var(--len) !important;
+
+  left: 0 !important;
+
+  right: auto !important;
+
+  bottom: auto !important;
+
+  width: var(--star-size) !important;
+
+  max-width: var(--star-size) !important;
+
+  height: auto !important;
+
+  transform: translateX(-50%) scale(1) !important;
+
+  transform-origin: center !important;
+
+  object-fit: contain !important;
+
+  animation: sixStarPulse var(--pulse-time, 3.2s) ease-in-out infinite !important;
+
+  animation-delay: var(--pulse-delay, 0s) !important;
+
+  pointer-events: none !important;
+
+  will-change: transform, opacity, filter;
+
+}
+
+/* LEFT: deliberately asymmetrical so it feels hung, not duplicated. */
+
+.checkin-decor .hang-left-1 {
+
+  left: 8% !important;
+
+  right: auto !important;
+
+  --len: 6vh;
+
+  --star-size: 24px;
+
+  --swing-time: 6.4s;
+
+  --swing-delay: -1.1s;
+
+  --pulse-time: 3.1s;
+
+  --pulse-delay: -.4s;
+
+}
+
+.checkin-decor .hang-left-2 {
+
+  left: 17% !important;
+
+  right: auto !important;
+
+  --len: 11vh;
+
+  --star-size: 34px;
+
+  --swing-time: 7.1s;
+
+  --swing-delay: -3.2s;
+
+  --pulse-time: 3.8s;
+
+  --pulse-delay: -1.7s;
+
+}
+
+.checkin-decor .hang-left-3 {
+
+  left: 27% !important;
+
+  right: auto !important;
+
+  --len: 4vh;
+
+  --star-size: 18px;
+
+  --swing-time: 5.8s;
+
+  --swing-delay: -4.3s;
+
+  --pulse-time: 2.9s;
+
+  --pulse-delay: -2.1s;
+
+}
+
+/* RIGHT: sits around the cake, never through the central headline. */
+
+.checkin-decor .hang-right-1 {
+
+  right: 7% !important;
+
+  left: auto !important;
+
+  --len: 5vh;
+
+  --star-size: 31px;
+
+  --swing-time: 6.8s;
+
+  --swing-delay: -2.4s;
+
+  --pulse-time: 3.5s;
+
+  --pulse-delay: -1.2s;
+
+}
+
+.checkin-decor .hang-right-2 {
+
+  right: 17% !important;
+
+  left: auto !important;
+
+  --len: 10vh;
+
+  --star-size: 23px;
+
+  --swing-time: 7.4s;
+
+  --swing-delay: -5.1s;
+
+  --pulse-time: 3s;
+
+  --pulse-delay: -.6s;
+
+}
+
+.checkin-decor .hang-right-3 {
+
+  right: 28% !important;
+
+  left: auto !important;
+
+  --len: 3.5vh;
+
+  --star-size: 17px;
+
+  --swing-time: 5.9s;
+
+  --swing-delay: -3.8s;
+
+  --pulse-time: 4s;
+
+  --pulse-delay: -2.6s;
+
+}
+
+@keyframes sixStarSwing {
+
+  0%, 100% { transform: rotate(-3.5deg); }
+
+  50% { transform: rotate(3.5deg); }
+
+}
+
+@keyframes sixStarPulse {
+
+  0%, 100% {
+
+    transform: translateX(-50%) scale(.88);
+
+    opacity: .68;
+
+    filter: brightness(.94) drop-shadow(0 0 0 rgba(255,106,66,0));
+
+  }
+
+  50% {
+
+    transform: translateX(-50%) scale(1.12);
+
+    opacity: 1;
+
+    filter: brightness(1.18) drop-shadow(0 0 7px rgba(255,106,66,.46));
+
+  }
+
+}
+
+/* Kill the previous 3-star positional classes if they still exist in the cascade. */
+
+.checkin-decor .hang-1,
+
+.checkin-decor .hang-2,
+
+.checkin-decor .hang-3 {
+
+  display: none !important;
+
+}
+
+/* Mobile: keep stars near edges and preserve a clean center for the title. */
+
+@media (max-width: 390px) {
+
+  .checkin-decor .hang-left-1  { left: 6% !important;  --star-size: 21px; }
+
+  .checkin-decor .hang-left-2  { left: 14% !important; --star-size: 29px; --len: 9vh; }
+
+  .checkin-decor .hang-left-3  { left: 24% !important; --star-size: 16px; }
+
+  .checkin-decor .hang-right-1 { right: 5% !important;  --star-size: 27px; }
+
+  .checkin-decor .hang-right-2 { right: 14% !important; --star-size: 20px; --len: 8.5vh; }
+
+  .checkin-decor .hang-right-3 { right: 24% !important; --star-size: 15px; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkin-decor .hang,
+
+  .checkin-decor .hang .decor-hang-star {
+
+    animation: none !important;
+
+  }
+
+}
+
+/* =========================================================
+   PAGE 3 — GACHA BIRTHDAY
+   Mobile-first / one-screen / scoped only to .gacha-page
+   ========================================================= */
+
+.gacha-page {
+  --how-orange: #FF6A42;
+  --how-cream: #FEFBEC;
+  --how-black: #000000;
+  --how-brown: #572514;
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--how-cream);
+  color: var(--how-brown);
+  font-weight: 500;
+}
+
+.gacha-header {
+  position: relative;
+  z-index: 20;
+  width: min(100%, 430px);
+  height: 62px;
+  margin: 0 auto;
+  padding: max(8px, env(safe-area-inset-top)) 18px 0;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  align-items: center;
+}
+
+.gacha-header > img {
+  justify-self: center;
+  width: 76px;
+  height: auto;
+}
+
+.gacha-back {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--how-brown);
+  border-radius: 50%;
+  background: var(--how-cream);
+  color: var(--how-brown);
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.gacha-scene {
+  position: relative;
+  z-index: 10;
+  width: min(100%, 430px);
+  height: calc(100svh - 62px);
+  margin: 0 auto;
+  padding: 14px 16px max(16px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) 50px;
+  justify-items: center;
+  overflow: hidden;
+}
+
+.gacha-copy {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  text-align: center;
+}
+
+.gacha-eyebrow {
+  margin: 0 0 8px;
+  color: var(--how-orange);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: .12em;
+  font-weight: 500;
+}
+
+.gacha-copy h1 {
+  margin: 0;
+  color: var(--how-black);
+  font-size: clamp(27px, 7.2vw, 32px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.gacha-copy strong {
+  display: block;
+  margin-top: 11px;
+  color: var(--how-brown);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.gacha-copy > p:last-child {
+  margin: 6px 0 0;
+  color: var(--how-brown);
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.gacha-machine-stage {
+  position: relative;
+  align-self: center;
+  width: min(66vw, 286px);
+  max-height: 390px;
+  aspect-ratio: .76;
+  margin: 18px 0 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+.gacha-tap {
+  position: relative;
+  z-index: 10;
+  align-self: end;
+  width: fit-content;
+  min-width: 280px;
+  max-width: calc(100vw - 64px);
+  height: 50px;
+  margin: 0;
+  padding: 0 28px;
+  border: 2px solid var(--how-brown);
+  border-radius: 999px;
+  background: var(--how-orange);
+  color: var(--how-brown);
+  box-shadow: 0 6px 0 var(--how-brown);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: .035em;
+  font-weight: 500;
+}
+
+.gacha-tap:disabled { opacity: .78; }
+
+.gacha-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.gacha-hang {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: var(--len);
+  background: color-mix(in srgb, var(--how-brown) 28%, transparent);
+  transform-origin: top center;
+  animation: gachaStarSwing var(--swing, 6s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.gacha-hang img {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: var(--size);
+  height: auto;
+  transform: translateX(-50%);
+  animation: gachaStarPulse var(--pulse, 3s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.gacha-hang--left-1 { left: 7%; --len: 7vh; --size: 25px; --delay: -1s; }
+.gacha-hang--left-2 { left: 17%; --len: 12vh; --size: 17px; --delay: -2.4s; --swing: 7s; }
+.gacha-hang--left-3 { left: 27%; --len: 4vh; --size: 13px; --delay: -4s; }
+.gacha-hang--right-1 { right: 7%; --len: 6vh; --size: 27px; --delay: -1.7s; }
+.gacha-hang--right-2 { right: 17%; --len: 11vh; --size: 18px; --delay: -3.1s; --swing: 7.3s; }
+.gacha-hang--right-3 { right: 27%; --len: 3.5vh; --size: 13px; --delay: -4.8s; }
+
+.gacha-edge-art {
+  position: absolute;
+  opacity: .12;
+  filter: saturate(.7);
+}
+
+.gacha-edge-art--cup {
+  left: -72px;
+  bottom: 7%;
+  width: 112px;
+  transform: rotate(-9deg);
+}
+
+.gacha-edge-art--cake {
+  right: -70px;
+  bottom: 9%;
+  width: 112px;
+  transform: rotate(8deg);
+}
+
+@keyframes gachaBallIdle {
+  0%, 100% { transform: translate(-50%,-50%) rotate(var(--ball-rotate)) scale(var(--ball-scale)); }
+  50% { transform: translate(-50%,calc(-50% - 4px)) rotate(calc(var(--ball-rotate) + 5deg)) scale(var(--ball-scale)); }
+}
+
+@keyframes gachaBallShuffle {
+  0% { transform: translate(-54%,-47%) rotate(calc(var(--ball-rotate) - 12deg)) scale(var(--ball-scale)); }
+  50% { transform: translate(-45%,-56%) rotate(calc(var(--ball-rotate) + 18deg)) scale(var(--ball-scale)); }
+  100% { transform: translate(-52%,-43%) rotate(calc(var(--ball-rotate) - 4deg)) scale(var(--ball-scale)); }
+}
+
+@keyframes gachaMachineShake {
+  from { transform: translateX(-2px) rotate(-.6deg); }
+  to { transform: translateX(2px) rotate(.6deg); }
+}
+
+@keyframes gachaStarSwing {
+  0%,100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes gachaStarPulse {
+  0%,100% { transform: translateX(-50%) scale(.88); opacity: .68; filter: brightness(.96); }
+  50% { transform: translateX(-50%) scale(1.12); opacity: 1; filter: brightness(1.18) drop-shadow(0 0 6px rgba(255,106,66,.42)); }
+}
+
+@media (max-height: 740px) {
+  .gacha-header {
+    height: 56px;
+  }
+
+  .gacha-back {
+    width: 46px;
+    height: 46px;
+    font-size: 25px;
+  }
+
+  .gacha-scene {
+    height: calc(100svh - 56px);
+    padding-top: 8px;
+    grid-template-rows: auto minmax(0, 1fr) 46px;
+  }
+
+  .gacha-eyebrow {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .gacha-copy h1 {
+    font-size: 27px;
+  }
+
+  .gacha-copy strong {
+    margin-top: 8px;
+    font-size: 11px;
+  }
+
+  .gacha-copy > p:last-child {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .gacha-machine-stage {
+    width: min(61vw, 260px);
+    max-height: 345px;
+    margin: 10px 0 10px;
+  }
+
+  .gacha-tap {
+    min-width: 270px;
+    height: 46px;
+    box-shadow: 0 5px 0 var(--how-brown);
+  }
+}
+
+@media (max-height: 650px) {
+  .gacha-scene {
+    padding-top: 4px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    grid-template-rows: auto minmax(0, 1fr) 44px;
+  }
+
+  .gacha-eyebrow { margin-bottom: 4px; }
+  .gacha-copy strong { margin-top: 6px; }
+  .gacha-copy > p:last-child { margin-top: 3px; }
+
+  .gacha-machine-stage {
+    width: min(55vw, 235px);
+    max-height: 300px;
+    margin: 6px 0 8px;
+  }
+
+  .gacha-tap {
+    min-width: 255px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  
+}
+
+/* =========================================================
+
+   CHECK-IN — MOBILE VERTICAL SCROLL FIX
+
+   Scoped only to check-in containers.
+
+   ========================================================= */
+
+html:has(.checkin-page),
+
+body:has(.checkin-page),
+
+html:has(.checkin-screen),
+
+body:has(.checkin-screen),
+
+html:has(.checkin-container),
+
+body:has(.checkin-container) {
+
+  height: auto !important;
+
+  min-height: 100% !important;
+
+  overflow-x: hidden !important;
+
+  overflow-y: auto !important;
+
+  overscroll-behavior-y: auto !important;
+
+  touch-action: pan-y !important;
+
+}
+
+.checkin-page,
+
+.checkin-screen,
+
+.checkin-container {
+
+  position: relative !important;
+
+  width: 100% !important;
+
+  height: auto !important;
+
+  min-height: 100dvh !important;
+
+  max-height: none !important;
+
+  overflow-x: hidden !important;
+
+  overflow-y: visible !important;
+
+  touch-action: pan-y !important;
+
+  overscroll-behavior-y: auto !important;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+@media (max-width: 768px) {
+
+  .checkin-page,
+
+  .checkin-screen,
+
+  .checkin-container {
+
+    height: auto !important;
+
+    min-height: 100dvh !important;
+
+    max-height: none !important;
+
+    overflow-y: visible !important;
+
+    padding-bottom: max(28px, env(safe-area-inset-bottom)) !important;
+
+  }
+
+  .checkin-page .checkin-shell,
+
+  .checkin-page .checkin-content,
+
+  .checkin-screen .checkin-shell,
+
+  .checkin-screen .checkin-content,
+
+  .checkin-container .checkin-shell,
+
+  .checkin-container .checkin-content {
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
+    overflow: visible !important;
+
+    touch-action: pan-y !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   CHECK-IN — SWIPE CTA INTERACTION FIX
+
+   Decoration stays visual-only; CTA receives pointer/touch.
+
+   ========================================================= */
+
+.checkin-page .checkin-decor,
+
+.checkin-page .checkin-decoration,
+
+.checkin-page .checkin-decor img,
+
+.checkin-page .checkin-decoration img,
+
+.checkin-screen .checkin-decor,
+
+.checkin-screen .checkin-decoration,
+
+.checkin-screen .checkin-decor img,
+
+.checkin-screen .checkin-decoration img,
+
+.checkin-container .checkin-decor,
+
+.checkin-container .checkin-decoration,
+
+.checkin-container .checkin-decor img,
+
+.checkin-container .checkin-decoration img {
+
+  pointer-events: none !important;
+
+}
+
+/* Keep the form controls and the swipe area above decorative assets. */
+
+.checkin-page form,
+
+.checkin-screen form,
+
+.checkin-container form,
+
+.checkin-page .checkin-content,
+
+.checkin-screen .checkin-content,
+
+.checkin-container .checkin-content {
+
+  position: relative;
+
+  z-index: 20;
+
+}
+
+/* Support the common class/id variants used for the swipe CTA. */
+
+.checkin-page :is(.swipe-cta, .swipe-button, .swipe-to-play, .slide-to-play, [data-swipe-cta]),
+
+.checkin-screen :is(.swipe-cta, .swipe-button, .swipe-to-play, .slide-to-play, [data-swipe-cta]),
+
+.checkin-container :is(.swipe-cta, .swipe-button, .swipe-to-play, .slide-to-play, [data-swipe-cta]) {
+
+  position: relative !important;
+
+  z-index: 100 !important;
+
+  pointer-events: auto !important;
+
+  touch-action: pan-x !important;
+
+  user-select: none !important;
+
+  -webkit-user-select: none !important;
+
+}
+
+/* The draggable orange thumb must be the top interactive layer. */
+
+.checkin-page :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]),
+
+.checkin-screen :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]),
+
+.checkin-container :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]) {
+
+  position: relative !important;
+
+  z-index: 101 !important;
+
+  pointer-events: auto !important;
+
+  touch-action: none !important;
+
+  cursor: grab !important;
+
+  user-select: none !important;
+
+  -webkit-user-select: none !important;
+
+}
+
+.checkin-page :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]):active,
+
+.checkin-screen :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]):active,
+
+.checkin-container :is(.swipe-cta__thumb, .swipe-thumb, .slider-thumb, .swipe-handle, .slide-handle, [data-swipe-thumb]):active {
+
+  cursor: grabbing !important;
+
+}
+
+/* PAGE 3 — birthday party refinement */
+.gacha-page .gacha-machine-stage{width:min(62vw,268px);max-height:368px;margin:16px 0 12px}
+.gacha-page .gacha-tap{box-shadow:0 5px 0 var(--how-brown)}
+.gacha-page .gacha-hang{z-index:2;opacity:.96}
+.gacha-page .gacha-hang--left-1{left:7%;--len:54px;--size:28px;--delay:-1s}
+.gacha-page .gacha-hang--left-2{left:17%;--len:88px;--size:17px;--delay:-2.4s}
+.gacha-page .gacha-hang--left-3{left:29%;--len:35px;--size:13px;--delay:-4s}
+.gacha-page .gacha-hang--right-1{right:7%;--len:58px;--size:29px;--delay:-1.7s}
+.gacha-page .gacha-hang--right-2{right:18%;--len:32px;--size:14px;--delay:-3.1s}
+.gacha-page .gacha-hang--right-3{right:29%;--len:92px;--size:18px;--delay:-4.8s}
+.gacha-page .gacha-sparkles{position:absolute;inset:0;pointer-events:none}
+.gacha-page .gacha-sparkle{position:absolute;z-index:2;color:var(--how-orange);font-style:normal;font-size:10px;line-height:1;opacity:.78;animation:gachaSparkle 2.8s ease-in-out infinite}
+.gacha-page .gacha-sparkle--1{left:10%;top:25%;animation-delay:-.4s}.gacha-page .gacha-sparkle--2{left:19%;top:35%;font-size:7px;animation-delay:-1.2s}.gacha-page .gacha-sparkle--3{left:12%;top:58%;font-size:8px;animation-delay:-2s}
+.gacha-page .gacha-sparkle--4{right:11%;top:27%;font-size:8px;animation-delay:-.8s}.gacha-page .gacha-sparkle--5{right:18%;top:39%;font-size:11px;animation-delay:-1.7s}.gacha-page .gacha-sparkle--6{right:10%;top:57%;font-size:7px;animation-delay:-2.4s}.gacha-page .gacha-sparkle--7{right:23%;top:67%;font-size:8px;animation-delay:-1s}
+.gacha-page .gacha-doodle{position:absolute;z-index:1;top:45%;color:var(--how-brown);font-size:28px;line-height:1;letter-spacing:3px;opacity:.07;writing-mode:vertical-rl}.gacha-page .gacha-doodle--left{left:4px;transform:rotate(8deg)}.gacha-page .gacha-doodle--right{right:4px;transform:rotate(188deg)}
+.gacha-page .gacha-edge-art{opacity:.14;filter:saturate(.72)}.gacha-page .gacha-edge-art--cup{left:-62px;bottom:8%;width:118px}.gacha-page .gacha-edge-art--cake{right:-60px;bottom:9%;width:118px}
+
+@keyframes gachaSparkle{0%,100%{transform:scale(.92) rotate(0);opacity:.45}50%{transform:scale(1.08) rotate(10deg);opacity:.9}}
+@media(max-height:740px){.gacha-page .gacha-machine-stage{width:min(57vw,246px);max-height:326px;margin:12px 0 10px}}
+@media(max-height:650px){.gacha-page .gacha-machine-stage{width:min(52vw,222px);max-height:284px;margin:8px 0}.gacha-page .gacha-sparkle--3,.gacha-page .gacha-sparkle--7,.gacha-page .gacha-doodle{display:none}}
+@media(prefers-reduced-motion:reduce){.gacha-page .gacha-sparkle{animation:none!important}}
+
+/* =========================================================
+   PAGE 3 — GACHA PHYSICS + TYPOGRAPHY FINAL
+   ========================================================= */
+.gacha-page .gacha-copy h1{
+  font-family:var(--font-script),"Comic Sans MS",cursive!important;
+  font-size:clamp(30px,8vw,38px)!important;
+  line-height:1.08!important;
+  letter-spacing:0!important;
+  font-weight:400!important;
+  text-transform:none!important;
+  white-space:nowrap;
+}
+.gacha-page .gacha-eyebrow,
+.gacha-page .gacha-copy strong,
+.gacha-page .gacha-copy>p:last-child,
+.gacha-page .gacha-tap{
+  font-weight:500!important;
+}
+.gacha-page .gacha-machine-stage{
+  width:min(59vw,256px)!important;
+  max-height:354px!important;
+  margin:16px 0 12px!important;
+}
+
+
+
+@keyframes gachaPileBounce{
+  from{transform:translate(-50%,-50%) rotate(var(--ball-rotate)) scale(var(--ball-scale))}
+  to{transform:translate(-50%,calc(-50% - 8px)) rotate(calc(var(--ball-rotate) + 7deg)) scale(var(--ball-scale))}
+}
+
+/* Force the six hanging stars to be visible at the end of their strings. */
+.gacha-page .gacha-hang{
+  display:block!important;
+  overflow:visible!important;
+  z-index:3!important;
+}
+.gacha-page .gacha-hang>img,
+.gacha-page .gacha-hang>span,
+.gacha-page .gacha-hang .gacha-star{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.gacha-page .gacha-hang>img{
+  position:absolute!important;
+  top:100%!important;
+  left:50%!important;
+  width:var(--size)!important;
+  height:auto!important;
+  max-width:none!important;
+  transform:translateX(-50%)!important;
+  object-fit:contain!important;
+}
+.gacha-page .gacha-hang--left-1{left:7%!important;--len:52px;--size:29px}
+.gacha-page .gacha-hang--left-2{left:17%!important;--len:88px;--size:18px}
+.gacha-page .gacha-hang--left-3{left:29%!important;--len:34px;--size:14px}
+.gacha-page .gacha-hang--right-1{right:7%!important;--len:56px;--size:30px}
+.gacha-page .gacha-hang--right-2{right:18%!important;--len:31px;--size:14px}
+.gacha-page .gacha-hang--right-3{right:29%!important;--len:90px;--size:19px}
+
+@media(max-height:740px){
+  .gacha-page .gacha-machine-stage{width:min(55vw,238px)!important;max-height:318px!important}
+  .gacha-page .gacha-copy h1{font-size:clamp(28px,7.5vw,34px)!important}
+}
+@media(max-height:650px){
+  .gacha-page .gacha-machine-stage{width:min(50vw,216px)!important;max-height:278px!important}
+}
+
+/* =========================================================
+   PAGE 3 — PHYSICAL PILE + TWO-LINE CAMPAIGN TITLE
+   ========================================================= */
+
+/* Same handwritten family used by the check-in handwritten heading. */
+.gacha-page .gacha-title{
+  margin:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:0!important;
+  font-family:var(--font-handwriting),var(--font-script),"Comic Sans MS",cursive!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  line-height:.89!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  white-space:normal!important;
+}
+.gacha-page .gacha-title-gacha,
+.gacha-page .gacha-title-birthday{
+  display:block;
+  font-family:inherit!important;
+  font-style:inherit!important;
+  font-weight:inherit!important;
+}
+.gacha-page .gacha-title-gacha{
+  color:#FF6A42!important;
+  font-size:clamp(34px,9vw,42px)!important;
+}
+.gacha-page .gacha-title-birthday{
+  margin-top:1px;
+  color:#572514!important;
+  font-size:clamp(32px,8.5vw,40px)!important;
+}
+
+/* Every non-title text element stays Medium. */
+.gacha-page .gacha-eyebrow,
+.gacha-page .gacha-copy strong,
+.gacha-page .gacha-copy>p:last-child,
+.gacha-page .gacha-tap,
+.gacha-page .gacha-back{
+  font-weight:500!important;
+}
+
+/* Slightly smaller machine to compensate for the denser chamber. */
+.gacha-page .gacha-machine-stage{
+  width:min(57vw,248px)!important;
+  max-height:344px!important;
+  margin:14px 0 12px!important;
+}
+
+
+
+
+
+
+
+
+
+@keyframes gachaChaoticSpin{
+  0%{
+    transform:translate(-55%,-44%) rotate(calc(var(--ball-rotate) - 13deg)) scale(var(--ball-scale));
+  }
+  50%{
+    transform:translate(-43%,calc(-50% - 22px)) rotate(calc(var(--ball-rotate) + 17deg)) scale(var(--ball-scale));
+  }
+  100%{
+    transform:translate(-52%,calc(-50% - 7px)) rotate(calc(var(--ball-rotate) + 5deg)) scale(var(--ball-scale));
+  }
+}
+
+@media(max-height:740px){
+  .gacha-page .gacha-title-gacha{font-size:34px!important}
+  .gacha-page .gacha-title-birthday{font-size:32px!important}
+  .gacha-page .gacha-machine-stage{width:min(53vw,230px)!important;max-height:308px!important}
+}
+@media(max-height:650px){
+  .gacha-page .gacha-title-gacha{font-size:31px!important}
+  .gacha-page .gacha-title-birthday{font-size:29px!important}
+  .gacha-page .gacha-machine-stage{width:min(49vw,210px)!important;max-height:270px!important}
+}
+
+/* =========================================================
+   FIX RIÊNG: GACHA TITLE FONT + CAPSULE PHYSICS
+   ========================================================= */
+.gacha-page .gacha-title{
+  font-family:"Bradley Hand","Bradley Hand ITC","Bradley Handwriting",cursive!important;
+}
+.gacha-page .gacha-title-gacha,
+.gacha-page .gacha-title-birthday{
+  font-family:"Bradley Hand","Bradley Hand ITC","Bradley Handwriting",cursive!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes gachaCapsuleSpin{
+  0%{
+    transform:translate(-54%,-46%) rotate(calc(var(--ball-rotate) - 17deg)) scale(var(--ball-scale));
+  }
+  45%{
+    transform:translate(-44%,calc(-50% - 25px)) rotate(calc(var(--ball-rotate) + 20deg)) scale(var(--ball-scale));
+  }
+  100%{
+    transform:translate(-51%,calc(-50% - 8px)) rotate(calc(var(--ball-rotate) + 6deg)) scale(var(--ball-scale));
+  }
+}
+
+/* =========================================================
+   PAGE 3 — GACHA TITLE FINAL LOCK
+   One line / bold / sans-serif / HOW palette
+   This block MUST stay at the very end of the stylesheet.
+   ========================================================= */
+.gacha-page .gacha-title {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: clamp(7px, 2vw, 11px) !important;
+  font-family: var(--font-cda), Arial, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.025em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.gacha-page .gacha-title-gacha,
+.gacha-page .gacha-title-birthday {
+  display: inline-block !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: var(--font-cda), Arial, sans-serif !important;
+  font-style: normal !important;
+  font-size: clamp(25px, 7.25vw, 34px) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.025em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.gacha-page .gacha-title-gacha {
+  color: var(--how-orange) !important;
+}
+
+.gacha-page .gacha-title-birthday {
+  color: var(--how-brown) !important;
+}
+
+/* Supporting copy remains Medium; brand spelling remains HOW. */
+.gacha-page .gacha-eyebrow,
+.gacha-page .gacha-copy strong,
+.gacha-page .gacha-copy > p:last-child,
+.gacha-page .gacha-tap,
+.gacha-page .gacha-back {
+  font-family: var(--font-cda), Arial, sans-serif !important;
+  font-weight: 500 !important;
+}
+
+/* Keep the full title on one line even on narrow phones. */
+@media (max-width: 390px) {
+  .gacha-page .gacha-title {
+    gap: 6px !important;
+  }
+  .gacha-page .gacha-title-gacha,
+  .gacha-page .gacha-title-birthday {
+    font-size: clamp(23px, 6.9vw, 29px) !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .gacha-page .gacha-title {
+    gap: 5px !important;
+  }
+  .gacha-page .gacha-title-gacha,
+  .gacha-page .gacha-title-birthday {
+    font-size: 22px !important;
+  }
+}
+
+/* =========================================================
+   GACHA TITLE — FINAL: BRADLEY HAND BOLD / ONE LINE
+   ========================================================= */
+.gacha-page .gacha-title,
+.gacha-page .gacha-title-line,
+.gacha-page .gacha-title-main {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  gap: clamp(6px, 1.8vw, 10px) !important;
+  width: 100% !important;
+  font-family: "Bradley Hand", "Segoe Print", cursive !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.gacha-page .gacha-title *,
+.gacha-page .gacha-title-line *,
+.gacha-page .gacha-title-main * {
+  font-family: "Bradley Hand", "Segoe Print", cursive !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.gacha-page .gacha-title .gacha-word,
+.gacha-page .gacha-title-line .gacha-word,
+.gacha-page .gacha-title-main .gacha-word {
+  color: var(--how-orange) !important;
+}
+
+.gacha-page .gacha-title .birthday-word,
+.gacha-page .gacha-title-line .birthday-word,
+.gacha-page .gacha-title-main .birthday-word {
+  color: var(--how-brown) !important;
+}
+
+@media (max-width: 390px) {
+  .gacha-page .gacha-title,
+  .gacha-page .gacha-title-line,
+  .gacha-page .gacha-title-main {
+    gap: 6px !important;
+    font-size: clamp(25px, 7.6vw, 32px) !important;
+  }
+}
+
+
+.gacha-page .gacha-machine-stage {
+  --glass-cx: 50%;
+  --glass-cy: 61.9%;
+  --glass-rx: 41%;
+  --glass-ry: 55.5%;
+  --glass-seam: 56.2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes gachaPileShake {
+  0%   { transform: translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--s,1)); }
+  50%  { transform: translate(-47%,calc(-50% - 5px)) rotate(calc(var(--r,0deg) + 7deg)) scale(var(--s,1)); }
+  100% { transform: translate(-53%,calc(-50% - 2px)) rotate(calc(var(--r,0deg) - 6deg)) scale(var(--s,1)); }
+}
+
+
+
+@keyframes gachaPrizeDrop {
+  0%   { transform: translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--s,1)); opacity:1; }
+  32%  { transform: translate(-50%,calc(-50% - 10px)) rotate(calc(var(--r,0deg) + 18deg)) scale(var(--s,1)); opacity:1; }
+  100% { transform: translate(-50%,120%) rotate(calc(var(--r,0deg) + 64deg)) scale(.92); opacity:0; }
+}
+
+@media (max-width: 390px) {
+  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  
+}
+
+
+/* Vùng kính */
+.gacha-page .gacha-machine-stage{
+  --glass-cx:50%;
+  --glass-cy:61.9%;
+  --glass-rx:41%;
+  --glass-ry:55.5%;
+  --glass-seam:56.2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes gachaPileShake{
+  0%  {transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--s,1))}
+  50% {transform:translate(-46%,calc(-50% - 6px)) rotate(calc(var(--r,0deg) + 9deg)) scale(var(--s,1))}
+  100%{transform:translate(-54%,calc(-50% - 2px)) rotate(calc(var(--r,0deg) - 8deg)) scale(var(--s,1))}
+}
+
+
+@keyframes gachaPrizeDrop{
+  0%  {transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--s,1));opacity:1}
+  32% {transform:translate(-50%,calc(-50% - 10px)) rotate(calc(var(--r,0deg) + 18deg)) scale(var(--s,1));opacity:1}
+  100%{transform:translate(-50%,120%) rotate(calc(var(--r,0deg) + 64deg)) scale(.92);opacity:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  
+}
+
+/* =========================================================
+   PAGE 3 — GACHA LAYOUT HARD RESET / FINAL
+   Keep this block at the VERY END of globals.css.
+   Fixes mobile overflow + copy/machine overlap.
+   ========================================================= */
+
+.gacha-page{
+  height:100dvh!important;
+  min-height:100dvh!important;
+  overflow:hidden!important;
+}
+
+.gacha-page .gacha-header{
+  position:relative!important;
+  z-index:30!important;
+  width:min(100%,430px)!important;
+  height:58px!important;
+  margin:0 auto!important;
+  padding:max(7px,env(safe-area-inset-top)) 14px 0!important;
+  grid-template-columns:46px 1fr 46px!important;
+}
+
+.gacha-page .gacha-header>img{
+  width:68px!important;
+  height:auto!important;
+}
+
+.gacha-page .gacha-back{
+  width:44px!important;
+  height:44px!important;
+  font-size:24px!important;
+}
+
+.gacha-page .gacha-scene{
+  position:relative!important;
+  z-index:10!important;
+  width:min(100%,430px)!important;
+  height:calc(100dvh - 58px)!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  padding:10px 14px max(12px,env(safe-area-inset-bottom))!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  overflow:hidden!important;
+}
+
+.gacha-page .gacha-copy{
+  position:relative!important;
+  z-index:20!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 4px!important;
+  text-align:center!important;
+}
+
+.gacha-page .gacha-eyebrow{
+  margin:0 0 8px!important;
+  font-size:clamp(10px,2.9vw,12px)!important;
+  line-height:1.15!important;
+  letter-spacing:.11em!important;
+  white-space:nowrap!important;
+}
+
+.gacha-page .gacha-title{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  gap:clamp(5px,1.6vw,9px)!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+
+.gacha-page .gacha-title-gacha,
+.gacha-page .gacha-title-birthday{
+  display:inline-block!important;
+  flex:0 1 auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  font-family:"Bradley Hand","Segoe Print",cursive!important;
+  font-size:clamp(24px,7vw,31px)!important;
+  font-weight:700!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+  white-space:nowrap!important;
+}
+
+.gacha-page .gacha-title-gacha{color:var(--how-orange)!important}
+.gacha-page .gacha-title-birthday{color:var(--how-brown)!important}
+
+.gacha-page .gacha-copy strong{
+  display:block!important;
+  margin:10px 0 0!important;
+  font-size:11px!important;
+  line-height:1.15!important;
+  font-weight:500!important;
+}
+
+.gacha-page .gacha-copy>p:last-child{
+  margin:5px 0 0!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  font-weight:500!important;
+}
+
+/* Machine owns its own row in normal flow. Never pull it into copy. */
+.gacha-page .gacha-machine-stage{
+  position:relative!important;
+  z-index:12!important;
+  flex:0 1 auto!important;
+  align-self:center!important;
+  width:min(58vw,248px)!important;
+  max-width:248px!important;
+  max-height:none!important;
+  aspect-ratio:.76!important;
+  margin:12px auto 8px!important;
+  padding:0!important;
+  transform:none!important;
+  translate:none!important;
+}
+
+
+
+
+
+/* CTA gets a dedicated bottom slot instead of competing with the machine. */
+.gacha-page .gacha-tap{
+  position:relative!important;
+  z-index:25!important;
+  flex:0 0 auto!important;
+  align-self:center!important;
+  width:fit-content!important;
+  min-width:250px!important;
+  max-width:calc(100vw - 48px)!important;
+  height:44px!important;
+  margin:auto auto 5px!important;
+  padding:0 22px!important;
+  font-size:11px!important;
+  box-shadow:0 4px 0 var(--how-brown)!important;
+}
+
+/* Decorative artwork must never affect the content flow. */
+.gacha-page .gacha-decor{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+
+@media (max-width:390px){
+  .gacha-page .gacha-title-gacha,
+  .gacha-page .gacha-title-birthday{
+    font-size:clamp(22px,6.7vw,27px)!important;
+  }
+  .gacha-page .gacha-machine-stage{
+    width:min(57vw,232px)!important;
+  }
+}
+
+@media (max-height:740px){
+  .gacha-page .gacha-header{height:54px!important}
+  .gacha-page .gacha-scene{
+    height:calc(100dvh - 54px)!important;
+    padding-top:6px!important;
+  }
+  .gacha-page .gacha-eyebrow{margin-bottom:5px!important}
+  .gacha-page .gacha-copy strong{margin-top:7px!important}
+  .gacha-page .gacha-copy>p:last-child{margin-top:3px!important}
+  .gacha-page .gacha-machine-stage{
+    width:min(53vw,222px)!important;
+    margin:7px auto 5px!important;
+  }
+  .gacha-page .gacha-tap{
+    height:41px!important;
+    margin-bottom:4px!important;
+  }
+}
+
+@media (max-height:650px){
+  .gacha-page .gacha-header{height:50px!important}
+  .gacha-page .gacha-header>img{width:60px!important}
+  .gacha-page .gacha-back{width:39px!important;height:39px!important;font-size:21px!important}
+  .gacha-page .gacha-scene{
+    height:calc(100dvh - 50px)!important;
+    padding-top:3px!important;
+  }
+  .gacha-page .gacha-eyebrow{font-size:9px!important;margin-bottom:3px!important}
+  .gacha-page .gacha-title-gacha,
+  .gacha-page .gacha-title-birthday{font-size:22px!important}
+  .gacha-page .gacha-copy strong{margin-top:5px!important;font-size:10px!important}
+  .gacha-page .gacha-copy>p:last-child{margin-top:2px!important;font-size:9px!important}
+  .gacha-page .gacha-machine-stage{
+    width:min(47vw,195px)!important;
+    margin:4px auto 3px!important;
+  }
+  .gacha-page .gacha-tap{
+    min-width:230px!important;
+    height:38px!important;
+    margin-bottom:3px!important;
+    font-size:10px!important;
+  }
+}
+
+
+
+
+.gacha-page .gacha-machine-stage{
+  /* Vùng kính theo hệ toạ độ của STAGE (đổi từ --glass-* của chamber):
+     cy = 61.9% x 56.2% = 34.8% ; ry = 55.5% x 56.2% = 31.2% */
+  --mask-cy:34.8%;
+  --mask-ry:31.2%;
+  /* Trụ kim loại giữa (phần luôn nằm TRƯỚC bóng) */
+  --pole-l:46.5%;
+  --pole-r:53.5%;
+  isolation:isolate;
+}
+
+
+
+
+
+
+
+
+/* ---------- 2. CTA LÊN CAO ----------
+   Máy giữ nguyên vị trí. Khoảng trống nằm do grid đẩy CTA xuống đáy
+   (align-self:end), không phải do margin/padding/spacer, nên chỉ nâng
+   riêng CTA bằng transform (không làm máy hay tiêu đề dịch chuyển). */
+.gacha-page{
+  --cta-lift:48px;
+}
+.gacha-page .gacha-tap{
+  transform:translateY(calc(var(--cta-lift) * -1));
+}
+@media(max-height:740px){
+  .gacha-page{--cta-lift:40px}
+}
+@media(max-height:650px){
+  .gacha-page{--cta-lift:30px}
+}
+
+
+
+
+
+
+
+
+
+@keyframes gachaPhysicsRumble {
+  from { transform: translateX(-0.45px); }
+  to   { transform: translate(0.45px, 0.25px); }
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  
+}
+
+
+.gacha-machine-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Small screens: preserve relative capsule size instead of shrinking to dots. */
+@media (max-width: 430px) {
+  
+}
+
+@media (max-width: 360px) {
+  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  
+}
+
+.gacha-page .gacha-machine-stage{
+  --glass-cx:50%; --glass-cy:61.9%;
+  --glass-rx:41%; --glass-ry:55.5%;
+  --glass-seam:56.2%;
+  isolation:isolate;
+}
+.gacha-page .gacha-machine-stage .gacha-machine-image--back{ z-index:1!important; }
+
+.gacha-page .gacha-machine-stage .gacha-ball-chamber{
+  position:absolute!important; left:0!important; top:0!important;
+  width:100%!important; height:var(--glass-seam)!important;
+  z-index:2!important; overflow:hidden!important; border-radius:0!important;
+  clip-path:ellipse(var(--glass-rx) var(--glass-ry) at var(--glass-cx) var(--glass-cy))!important;
+}
+
+.gacha-page .gacha-machine-stage .gacha-ball-chamber .gacha-ball{
+  position:absolute!important; display:block!important;
+  left:var(--x)!important; top:var(--y)!important; z-index:var(--z)!important;
+  width:19.5%!important; height:auto!important; max-width:none!important;
+  opacity:1!important; transition:none!important; animation:none!important;
+  transform:translate(-50%,-50%)
+            translate(var(--physics-x,0px),var(--physics-y,0px))
+            rotate(calc(var(--r,0deg) + var(--physics-r,0deg)))
+            scale(var(--s,1))!important;
+}
+
+.gacha-page .gacha-machine-stage .gacha-machine-image--front{
+  z-index:3!important;
+  -webkit-mask-image:
+    linear-gradient(to right,transparent 0 47.1%,#000 47.1% 52.9%,transparent 52.9%),
+    linear-gradient(to bottom,transparent 0 var(--glass-seam),#000 var(--glass-seam));
+  mask-image:
+    linear-gradient(to right,transparent 0 47.1%,#000 47.1% 52.9%,transparent 52.9%),
+    linear-gradient(to bottom,transparent 0 var(--glass-seam),#000 var(--glass-seam));
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+}
+/* ===== GACHA — BASE LAYER FIX (đặt ở CUỐI file) ===== */
+
+/* Stage chỉ có kích thước từ width + aspect-ratio, không bị nội dung chống to */
+.gacha-page .gacha-machine-stage{
+  position:relative!important;
+  flex:0 0 auto!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+
+/* Cả 2 ảnh máy phủ đúng khung stage, chồng lên nhau */
+.gacha-page .gacha-machine-stage .gacha-machine-image{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  pointer-events:none!important;
+}
+.gacha-page .gacha-machine-stage .gacha-machine-image--back{ z-index:1!important; }
+.gacha-page .gacha-machine-stage .gacha-machine-image--front{ z-index:3!important; }
+
+/* ===== GACHA — CHAMBER TỈ LỆ 100:74 ===== */
+.gacha-page .gacha-machine-stage .gacha-ball-chamber{
+  position:absolute!important;
+  left:0!important; top:0!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:100 / 74!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+  z-index:2!important;
+  clip-path:ellipse(41% 55.4% at 50% 61.9%)!important;
+  -webkit-clip-path:ellipse(41% 55.4% at 50% 61.9%)!important;
+  pointer-events:none!important;
+}
+
+.gacha-page .gacha-machine-stage .gacha-ball-chamber .gacha-ball{
+  position:absolute!important;
+  display:block!important;
+  left:var(--x)!important;
+  top:var(--y)!important;
+  z-index:var(--z)!important;
+  width:19.5%!important;
+  height:auto!important;
+  max-width:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translate(-50%,-50%)
+            translate(var(--physics-x,0px),var(--physics-y,0px))
+            rotate(calc(var(--r,0deg) + var(--physics-r,0deg)))
+            scale(var(--s,1))!important;
+}
+/* ===== GACHA — LỚP KÍNH PHỦ LÊN BÓNG (cho cảm giác bóng ở bên trong) ===== */
+.gacha-page .gacha-machine-stage .gacha-ball-chamber::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3000;               /* cao hơn mọi viên bóng (z tối đa ~1700) */
+  pointer-events:none;
+  background:
+    /* ánh sáng chéo ở góc trên trái */
+    linear-gradient(125deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 32%),
+    /* kính hơi mờ dần về phía mép, bóng ở rìa trông sâu hơn */
+    radial-gradient(ellipse 41% 55.4% at 50% 61.9%,
+      rgba(255,255,255,0) 58%,
+      rgba(255,255,255,.34) 100%);
+}
+
+/* Bóng phía sau nhạt và tối hơn một chút để tạo chiều sâu */
+.gacha-page .gacha-machine-stage .gacha-ball-chamber .gacha-ball--rear:nth-child(n){
+  opacity:.82!important;
+  filter:brightness(.88) saturate(.9)!important;
+}
+
+/* =========================================================
+   PAGE 3 — GACHA BIRTHDAY DECO / CLEAN FINAL
+   Chỉ: sao treo hiện có + 1 bánh nhỏ + confetti cam/nâu li ti.
+   Không cup / doodle / balloon / flag. Không ảnh hưởng layout.
+   ========================================================= */
+
+.gacha-page .gacha-decor{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+
+/* Bỏ các deco thừa ở hai mép. */
+.gacha-page .gacha-edge-art--cup,
+.gacha-page .gacha-doodle{
+  display:none!important;
+}
+
+/* Chỉ giữ 1 bánh sinh nhật nhỏ ở góc phải dưới.
+   Crop nhẹ qua mép để nó chỉ đóng vai trò background. */
+.gacha-page .gacha-edge-art--cake{
+  display:block!important;
+  position:absolute!important;
+  right:-44px!important;
+  bottom:5.5%!important;
+  width:112px!important;
+  height:auto!important;
+  opacity:.11!important;
+  filter:saturate(.72)!important;
+  transform:rotate(7deg)!important;
+  transform-origin:center!important;
+  animation:none!important;
+  pointer-events:none!important;
+}
+
+/* Confetti: nhỏ, thưa, chỉ nằm ở khoảng trống hai bên.
+   Không rơi vào vùng máy gacha trung tâm. */
+.gacha-page .gacha-sparkles{
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+
+.gacha-page .gacha-sparkle{
+  position:absolute!important;
+  display:block!important;
+  width:4px!important;
+  height:4px!important;
+  font-size:0!important;
+  line-height:0!important;
+  border-radius:1px!important;
+  background:var(--how-orange)!important;
+  color:transparent!important;
+  opacity:.52!important;
+  animation:gachaConfettiFloat 4.8s ease-in-out infinite!important;
+  will-change:transform,opacity;
+}
+
+/* Trái */
+.gacha-page .gacha-sparkle--1{
+  left:9%!important; top:27%!important;
+  transform:rotate(35deg);
+  animation-delay:-.6s!important;
+}
+.gacha-page .gacha-sparkle--2{
+  left:17%!important; top:42%!important;
+  width:3px!important; height:6px!important;
+  background:var(--how-brown)!important;
+  transform:rotate(-24deg);
+  animation-delay:-2.1s!important;
+}
+.gacha-page .gacha-sparkle--3{
+  left:11%!important; top:64%!important;
+  width:3px!important; height:3px!important;
+  transform:rotate(45deg);
+  animation-delay:-3.2s!important;
+}
+
+/* Phải */
+.gacha-page .gacha-sparkle--4{
+  right:10%!important; top:29%!important;
+  width:3px!important; height:5px!important;
+  background:var(--how-brown)!important;
+  transform:rotate(28deg);
+  animation-delay:-1.2s!important;
+}
+.gacha-page .gacha-sparkle--5{
+  right:17%!important; top:45%!important;
+  width:4px!important; height:4px!important;
+  transform:rotate(45deg);
+  animation-delay:-2.7s!important;
+}
+.gacha-page .gacha-sparkle--6{
+  right:9%!important; top:61%!important;
+  width:3px!important; height:6px!important;
+  background:var(--how-brown)!important;
+  transform:rotate(-32deg);
+  animation-delay:-3.8s!important;
+}
+
+/* Chỉ 6 hạt là đủ. */
+.gacha-page .gacha-sparkle--7{
+  display:none!important;
+}
+
+@keyframes gachaConfettiFloat{
+  0%,100%{
+    translate:0 0;
+    rotate:0deg;
+    opacity:.34;
+  }
+  50%{
+    translate:0 -3px;
+    rotate:10deg;
+    opacity:.62;
+  }
+}
+
+/* Giữ cụm sao treo hiện tại, nhưng không cho nó cạnh tranh với headline. */
+.gacha-page .gacha-hang{
+  opacity:.92!important;
+}
+
+/* Mobile hẹp: cake nhỏ thêm, confetti lùi sát mép. */
+@media (max-width:390px){
+  .gacha-page .gacha-edge-art--cake{
+    right:-48px!important;
+    bottom:5%!important;
+    width:102px!important;
+    opacity:.10!important;
+  }
+
+  .gacha-page .gacha-sparkle--1{left:7%!important}
+  .gacha-page .gacha-sparkle--2{left:12%!important}
+  .gacha-page .gacha-sparkle--3{left:7%!important}
+  .gacha-page .gacha-sparkle--4{right:7%!important}
+  .gacha-page .gacha-sparkle--5{right:12%!important}
+  .gacha-page .gacha-sparkle--6{right:7%!important}
+}
+
+/* Màn thấp: tránh cake chạm CTA/audio. */
+@media (max-height:650px){
+  .gacha-page .gacha-edge-art--cake{
+    right:-45px!important;
+    bottom:8%!important;
+    width:92px!important;
+  }
+
+  .gacha-page .gacha-sparkle--3,
+  .gacha-page .gacha-sparkle--6{
+    display:none!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .gacha-page .gacha-sparkle{
+    animation:none!important;
+  }
+}
+
+/* PAGE 3 — BIRTHDAY DECO — FINAL
+   Paste this block at the VERY END of globals.css.
+   Dedicated selectors intentionally avoid the old gacha-edge-art/sparkle cascade. */
+
+.gacha-page .gacha-decor{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+
+/* ONE birthday cake only — clearly visible, but still background decoration. */
+.gacha-page .gacha-birthday-cake{
+  display:block!important;
+  visibility:visible!important;
+  position:absolute!important;
+  z-index:4!important;
+  right:-24px!important;
+  bottom:5.5%!important;
+  width:118px!important;
+  max-width:none!important;
+  height:auto!important;
+  opacity:.34!important;
+  filter:saturate(.82)!important;
+  transform:rotate(7deg)!important;
+  transform-origin:center!important;
+  pointer-events:none!important;
+}
+
+/* Six tiny confetti pieces only, kept in the side gutters. */
+.gacha-page .gacha-birthday-confetti{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:4!important;
+  pointer-events:none!important;
+}
+
+.gacha-page .gacha-birthday-dot{
+  display:block!important;
+  visibility:visible!important;
+  position:absolute!important;
+  width:5px!important;
+  height:5px!important;
+  border-radius:1px!important;
+  background:#FF6A42!important;
+  opacity:.70!important;
+  transform:rotate(45deg);
+  animation:gachaBirthdayDot 4.6s ease-in-out infinite!important;
+}
+.gacha-page .gacha-birthday-dot--1{left:9%!important;top:27%!important}
+.gacha-page .gacha-birthday-dot--2{left:17%!important;top:43%!important;width:4px!important;height:7px!important;background:#572514!important;animation-delay:-1.1s!important}
+.gacha-page .gacha-birthday-dot--3{left:10%!important;top:63%!important;width:4px!important;height:4px!important;animation-delay:-2.3s!important}
+.gacha-page .gacha-birthday-dot--4{right:10%!important;top:29%!important;width:4px!important;height:7px!important;background:#572514!important;animation-delay:-.7s!important}
+.gacha-page .gacha-birthday-dot--5{right:17%!important;top:46%!important;animation-delay:-1.8s!important}
+.gacha-page .gacha-birthday-dot--6{right:10%!important;top:61%!important;width:4px!important;height:6px!important;background:#572514!important;animation-delay:-3s!important}
+
+@keyframes gachaBirthdayDot{
+  0%,100%{translate:0 0;rotate:0deg;opacity:.52}
+  50%{translate:0 -4px;rotate:12deg;opacity:.82}
+}
+
+@media(max-width:390px){
+  .gacha-page .gacha-birthday-cake{
+    right:-28px!important;
+    bottom:6%!important;
+    width:108px!important;
+    opacity:.31!important;
+  }
+  .gacha-page .gacha-birthday-dot--1,
+  .gacha-page .gacha-birthday-dot--3{left:7%!important}
+  .gacha-page .gacha-birthday-dot--4,
+  .gacha-page .gacha-birthday-dot--6{right:7%!important}
+}
+
+@media(max-height:650px){
+  .gacha-page .gacha-birthday-cake{
+    right:-27px!important;
+    bottom:8%!important;
+    width:96px!important;
+  }
+  .gacha-page .gacha-birthday-dot--3,
+  .gacha-page .gacha-birthday-dot--6{display:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .gacha-page .gacha-birthday-dot{animation:none!important}
 }
